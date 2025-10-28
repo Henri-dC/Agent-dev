@@ -6,7 +6,9 @@ export default {
     "./approche.html",
     "./contact.html",
     "./services.html",
-    "./js/script.js",
+    "./connexion-patient.html",
+    "./prendre-rdv.html",
+    "./js/script.js"
     // Si les fichiers Vue sont pertinents, décommenter ci-dessous
     // "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],

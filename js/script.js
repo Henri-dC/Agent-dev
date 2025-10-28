@@ -56,4 +56,41 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // --- New logic for login form --- PREVENT DEFAULT REDIRECTION
+    const loginForm = document.getElementById('login-form');
+    const loginMessage = document.getElementById('login-message');
+
+    if (loginForm && loginMessage) {
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent default form submission
+
+            // Simulate a successful login
+            loginMessage.classList.remove('hidden');
+            setTimeout(() => {
+                window.location.href = 'prendre-rdv.html'; // Redirect to appointment page
+            }, 1500); // Redirect after 1.5 seconds
+        });
+    }
+
+    // --- New logic for appointment form ---
+    const appointmentForm = document.getElementById('appointment-form');
+    const appointmentMessage = document.getElementById('appointment-message');
+
+    if (appointmentForm && appointmentMessage) {
+        appointmentForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent default form submission
+
+            // Simulate appointment booking success
+            appointmentMessage.classList.remove('hidden');
+            // In a real application, you would send this data to a server
+            // and handle the response.
+            // For now, just display a success message.
+            setTimeout(() => {
+                // Optionally clear the form or redirect
+                appointmentForm.reset();
+                // appointmentMessage.classList.add('hidden'); // Hide after a while if not redirecting
+            }, 3000); // Keep message visible for 3 seconds
+        });
+    }
 });

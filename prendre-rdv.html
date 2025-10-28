@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>À Propos - Dr. Clara Dubois</title>
+    <title>Prendre Rendez-vous - Dr. Clara Dubois</title>
     <link rel="stylesheet" href="css/main.css">
   </head>
   <body class="font-sans bg-body-bg text-text-dark leading-relaxed">
@@ -13,7 +13,7 @@
         <button id="hamburger-btn" class="lg:hidden flex flex-col justify-around w-8 h-6 bg-transparent border-none cursor-pointer p-0 z-50 focus:outline-none" aria-label="Toggle navigation" aria-expanded="false">
           <span class="block w-full h-0.5 bg-white rounded-sm transition-all duration-300 ease-in-out origin-top-left" id="bar1"></span>
           <span class="block w-full h-0.5 bg-white rounded-sm transition-all duration-300 ease-in-out" id="bar2"></span>
-          <span class="block w-full h-0.5 bg-white rounded-sm transition-all duration-300 ease-in-out origin-bottom-left" id="bar3"></span>
+          <span class="block w-full h-0.5 bg-white rounded-sm transition-all duration-300 ease-in-out" id="bar3"></span>
         </button>
         <nav id="main-nav" class="hidden lg:flex flex-grow justify-end">
           <ul class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-6">
@@ -30,18 +30,25 @@
 
     <main>
       <section class="container mx-auto px-4 py-10 content-section">
-        <h2 class="text-2xl md:text-3xl font-bold text-primary-blue mb-8 text-center">Qui suis-je ?</h2>
-        <div class="flex flex-wrap items-center mb-10">
-          <img src="https://via.placeholder.com/400x300?text=Portrait+Dr+Dubois" alt="Portrait de Dr. Clara Dubois" class="w-full md:w-2/5 lg:w-1/3 h-auto rounded-lg shadow-md mb-6 md:mb-0 md:ml-8 order-2 md:order-2">
-          <div class="md:flex-1 md:pr-8 order-1 md:order-1">
-            <p class="mb-4 text-text-medium">Je suis Dr. Clara Dubois, psychothérapeute diplômée, spécialisée dans l'accompagnement des adultes et des adolescents. Mon parcours est riche de plusieurs années d'expérience en cabinet libéral et en institutions de santé, où j'ai eu l'opportunité d'accompagner des personnes confrontées à diverses problématiques.</p>
-            <p class="mb-4 text-text-medium">Ma formation initiale en psychologie clinique, complétée par des spécialisations en thérapies cognitives et comportementales (TCC) et en approche systémique, me permet de proposer une prise en charge intégrative, adaptée aux besoins spécifiques de chaque individu. Je suis également membre de l'association des psychothérapeutes agréés.</p>
-          </div>
-        </div>
+        <h2 class="text-2xl md:text-3xl font-bold text-primary-blue mb-8 text-center">Prendre Rendez-vous</h2>
+        <p class="text-lg text-text-medium text-center max-w-3xl mx-auto mb-10">Utilisez le formulaire ci-dessous pour choisir une date et une heure pour votre consultation.</p>
 
-        <h2 class="text-2xl md:text-3xl font-bold text-primary-blue mb-8 text-center">Ma Philosophie</h2>
-        <p class="mb-4 text-text-medium">Je crois en une approche thérapeutique qui place l'individu au centre de son propre processus de guérison et de développement. Mon rôle est de vous offrir un espace sûr, confidentiel et dénué de jugement, où vous pourrez explorer vos pensées, vos émotions et vos comportements. Ensemble, nous travaillerons à identifier les ressources qui sont déjà en vous et à développer de nouvelles stratégies pour faire face aux difficultés.</p>
-        <p class="mb-4 text-text-medium">L'objectif de nos séances est de vous aider à mieux vous comprendre, à vous sentir plus aligné(e) avec vos valeurs et à construire une vie plus sereine et épanouissante. Chaque accompagnement est unique, respectueux de votre rythme et de vos objectifs personnels.</p>
+        <form id="appointment-form" class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md mb-12">
+          <div class="mb-5">
+            <label for="rdv-date" class="block mb-2 font-bold text-primary-blue">Date souhaitée :</label>
+            <input type="date" id="rdv-date" name="rdv-date" required class="w-full p-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-calm-blue">
+          </div>
+          <div class="mb-5">
+            <label for="rdv-time" class="block mb-2 font-bold text-primary-blue">Heure souhaitée :</label>
+            <input type="time" id="rdv-time" name="rdv-time" required class="w-full p-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-calm-blue">
+          </div>
+          <div class="mb-5">
+            <label for="rdv-reason" class="block mb-2 font-bold text-primary-blue">Motif du rendez-vous :</label>
+            <textarea id="rdv-reason" name="rdv-reason" rows="4" placeholder="Ex: Première consultation, suivi, anxiété, etc." required class="w-full p-3 border border-gray-300 rounded-md text-base resize-y focus:outline-none focus:ring-2 focus:ring-calm-blue"></textarea>
+          </div>
+          <button type="submit" class="btn bg-calm-blue hover:bg-calm-blue-dark text-white py-3 px-6 rounded-md font-bold transition-colors duration-300 block w-auto mx-auto">Confirmer le rendez-vous</button>
+          <p id="appointment-message" class="text-center mt-4 text-green-600 hidden">Votre demande de rendez-vous a été envoyée. Je vous recontacterai bientôt pour confirmer.</p>
+        </form>
       </section>
     </main>
 
