@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mainNav.classList.toggle('shadow-lg');
             mainNav.classList.toggle('py-4');
             mainNav.classList.toggle('space-y-2'); // Add spacing for mobile links
+            mainNav.classList.toggle('z-50'); // Ensure menu appears on top
 
             // Animate hamburger icon
             bar1.classList.toggle('rotate-45');
@@ -36,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('resize', () => {
             if (window.innerWidth >= 1024) { // Tailwind's 'lg' breakpoint
                 mainNav.classList.add('hidden'); // Ensure it's hidden when resizing from mobile
-                mainNav.classList.remove('flex', 'flex-col', 'absolute', 'top-full', 'left-0', 'w-full', 'bg-primary-blue', 'shadow-lg', 'py-4', 'space-y-2');
+                mainNav.classList.remove('flex', 'flex-col', 'absolute', 'top-full', 'left-0', 'w-full', 'bg-primary-blue', 'shadow-lg', 'py-4', 'space-y-2', 'z-50'); // Remove z-50
                 hamburgerBtn.setAttribute('aria-expanded', 'false');
 
                 // Reset hamburger icon
