@@ -18,7 +18,6 @@ const toggleMenu = () => {
       <ul :class="{ 'menu-open': isMenuOpen }">
         <li><router-link to="/" @click="isMenuOpen = false">Accueil</router-link></li>
         <li><router-link to="/chaussures" @click="isMenuOpen = false">Chaussures</router-link></li>
-        <li><router-link to="/vetements" @click="isMenuOpen = false">Vêtements</router-link></li>
       </ul>
     </nav>
   </header>
@@ -177,4 +176,3 @@ body {
     width: auto; /* Permet aux liens de prendre leur largeur naturelle */
   }
 }
-</style>
