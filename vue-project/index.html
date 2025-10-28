@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma Boutique</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: green;
+            color: #333;
+        }
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex; /* Utilisation de flexbox pour un menu horizontal */
+            justify-content: center; /* Centre les éléments du menu */
+        }
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        nav ul li a:hover {
+            background-color: #575757;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+        }
+        p {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Styles et animation pour le point blanc */
+        .animated-dot {
+            position: fixed; /* Pour qu'il bouge sur toute la page et reste visible même en scrollant */
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%; /* Pour faire un cercle */
+            top: 0;
+            left: 0;
+            animation: moveDot 8s linear infinite; /* 8 secondes, linéaire, se répète à l'infini */
+            z-index: 9999; /* S'assure que le point est au-dessus des autres éléments */
+        }
+
+        @keyframes moveDot {
+            0% {
+                top: 0;
+                left: 0;
+            }
+            25% {
+                top: 0;
+                left: calc(100vw - 20px); /* Va en haut à droite (100% largeur - largeur du point) */
+            }
+            50% {
+                top: calc(100vh - 20px); /* Va en bas à droite (100% hauteur - hauteur du point) */
+                left: calc(100vw - 20px);
+            }
+            75% {
+                top: calc(100vh - 20px); /* Va en bas à gauche */
+                left: 0;
+            }
+            100% {
+                top: 0;
+                left: 0; /* Revient en haut à gauche */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-dot"></div>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#vetements">Vêtements</a></li>
+                <li><a href="#accessoires">Accessoires</a></li>
+                <li><a href="#chaussures">Chaussures</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Bienvenue sur notre boutique</h1>
+        <p>Découvrez nos dernières collections de vêtements et d'accessoires.</p>
+    </main>
+</body>
+</html>
