@@ -7,22 +7,22 @@
     <link rel="stylesheet" href="css/main.css">
   </head>
   <body class="font-sans bg-body-bg text-text-dark leading-relaxed">
-    <header class="bg-primary-blue text-white py-4 shadow-md relative">
+    <header class="bg-primary-header text-white py-4 shadow-md relative">
       <div class="container mx-auto px-4 flex justify-between items-center">
-        <h1 class="text-2xl font-bold"><a href="index.html" class="text-white no-underline">Dr. Clara Dubois</a></h1>
+        <h1 class="text-2xl font-bold"><a href="index.html" class="text-black no-underline">Dr. Clara Dubois</a></h1>
         <button id="hamburger-btn" class="lg:hidden flex flex-col justify-around w-8 h-6 bg-transparent border-none cursor-pointer p-0 z-50 focus:outline-none" aria-label="Toggle navigation" aria-expanded="false">
-          <span class="block w-full h-0.5 bg-white rounded-sm transition-all duration-300 ease-in-out origin-top-left" id="bar1"></span>
-          <span class="block w-full h-0.5 bg-white rounded-sm transition-all duration-300 ease-in-out" id="bar2"></span>
-          <span class="block w-full h-0.5 bg-white rounded-sm transition-all duration-300 ease-in-out" id="bar3"></span>
+          <span class="block w-full h-0.5 bg-primary-text rounded-sm transition-all duration-300 ease-in-out origin-top-left" id="bar1"></span>
+          <span class="block w-full h-0.5 bg-primary-text rounded-sm transition-all duration-300 ease-in-out" id="bar2"></span>
+          <span class="block w-full h-0.5 bg-primary-text rounded-sm transition-all duration-300 ease-in-out" id="bar3"></span>
         </button>
-        <nav id="main-nav" class="hidden lg:flex flex-grow justify-end">
+        <nav id="main-nav" class="hidden lg:flex flex-grow justify-center">
           <ul class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-6">
-            <li><a href="index.html" class="text-white font-semibold hover:text-light-blue transition-colors duration-300 block py-2 px-4">Accueil</a></li>
-            <li><a href="a-propos.html" class="text-white font-semibold hover:text-light-blue transition-colors duration-300 block py-2 px-4">À Propos</a></li>
-            <li><a href="services.html" class="text-white font-semibold hover:text-light-blue transition-colors duration-300 block py-2 px-4">Services</a></li>
-            <li><a href="approche.html" class="text-white font-semibold hover:text-light-blue transition-colors duration-300 block py-2 px-4">Approche</a></li>
-            <li><a href="contact.html" class="text-white font-semibold hover:text-light-blue transition-colors duration-300 block py-2 px-4">Contact</a></li>
-            <li><a href="connexion-patient.html" class="text-white font-semibold hover:text-light-blue transition-colors duration-300 block py-2 px-4">Espace Patient</a></li>
+            <li><a href="index.html" class="text-text-dark text-lg font-semibold hover:text-secondary-accent transition-colors duration-300 block py-2 px-4">Accueil</a></li>
+            <li><a href="a-propos.html" class="text-text-dark text-lg font-semibold hover:text-secondary-accent transition-colors duration-300 block py-2 px-4">À Propos</a></li>
+            <li><a href="services.html" class="text-text-dark text-lg font-semibold hover:text-secondary-accent transition-colors duration-300 block py-2 px-4">Services</a></li>
+            <li><a href="approche.html" class="text-text-dark text-lg font-semibold hover:text-secondary-accent transition-colors duration-300 block py-2 px-4">Approche</a></li>
+            <li><a href="contact.html" class="text-text-dark text-lg font-semibold hover:text-secondary-accent transition-colors duration-300 block py-2 px-4">Contact</a></li>
+            <li><a href="connexion-patient.html" class="text-text-dark text-lg font-semibold hover:text-secondary-accent transition-colors duration-300 block py-2 px-4">Espace Patient</a></li>
           </ul>
         </nav>
       </div>
@@ -30,29 +30,29 @@
 
     <main>
       <section class="container mx-auto px-4 py-10 content-section">
-        <h2 class="text-2xl md:text-3xl font-bold text-primary-blue mb-8 text-center">Prendre Rendez-vous</h2>
+        <h2 class="text-2xl md:text-3xl font-bold text-primary-text mb-8 text-center">Prendre Rendez-vous</h2>
         <p class="text-lg text-text-medium text-center max-w-3xl mx-auto mb-10">Utilisez le formulaire ci-dessous pour choisir une date et une heure pour votre consultation.</p>
 
         <form id="appointment-form" class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md mb-12">
           <div class="mb-5">
-            <label for="rdv-date" class="block mb-2 font-bold text-primary-blue">Date souhaitée :</label>
-            <input type="date" id="rdv-date" name="rdv-date" required class="w-full p-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-calm-blue">
+            <label for="rdv-date" class="block mb-2 font-bold text-primary-text">Date souhaitée :</label>
+            <input type="date" id="rdv-date" name="rdv-date" required class="w-full p-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-secondary-accent">
           </div>
           <div class="mb-5">
-            <label for="rdv-time" class="block mb-2 font-bold text-primary-blue">Heure souhaitée :</label>
-            <input type="time" id="rdv-time" name="rdv-time" required class="w-full p-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-calm-blue">
+            <label for="rdv-time" class="block mb-2 font-bold text-primary-text">Heure souhaitée :</label>
+            <input type="time" id="rdv-time" name="rdv-time" required class="w-full p-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-secondary-accent">
           </div>
           <div class="mb-5">
-            <label for="rdv-reason" class="block mb-2 font-bold text-primary-blue">Motif du rendez-vous :</label>
-            <textarea id="rdv-reason" name="rdv-reason" rows="4" placeholder="Ex: Première consultation, suivi, anxiété, etc." required class="w-full p-3 border border-gray-300 rounded-md text-base resize-y focus:outline-none focus:ring-2 focus:ring-calm-blue"></textarea>
+            <label for="rdv-reason" class="block mb-2 font-bold text-primary-text">Motif du rendez-vous :</label>
+            <textarea id="rdv-reason" name="rdv-reason" rows="4" placeholder="Ex: Première consultation, suivi, anxiété, etc." required class="w-full p-3 border border-gray-300 rounded-md text-base resize-y focus:outline-none focus:ring-2 focus:ring-secondary-accent"></textarea>
           </div>
-          <button type="submit" class="btn bg-calm-blue hover:bg-calm-blue-dark text-white py-3 px-6 rounded-md font-bold transition-colors duration-300 block w-auto mx-auto">Confirmer le rendez-vous</button>
+          <button type="submit" class="py-3 px-6 rounded-lg font-bold transition-all duration-300 ease-in-out bg-button-bg hover:bg-button-hover-bg text-white shadow-md hover:shadow-lg hover:scale-105 active:scale-95 block w-auto mx-auto">Confirmer le rendez-vous</button>
           <p id="appointment-message" class="text-center mt-4 text-green-600 hidden">Votre demande de rendez-vous a été envoyée. Je vous recontacterai bientôt pour confirmer.</p>
         </form>
       </section>
     </main>
 
-    <footer class="bg-primary-blue text-white text-center py-6 mt-12">
+    <footer class="bg-primary-header text-primary-text text-center py-6 mt-12">
       <div class="container mx-auto px-4">
         <p class="text-sm">&copy; 2023 Dr. Clara Dubois. Tous droits réservés.</p>
       </div>

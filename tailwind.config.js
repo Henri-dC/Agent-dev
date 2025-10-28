@@ -15,16 +15,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        'primary-blue': '#4A6E82',
-        'light-blue': '#9EC0D4',
-        'calm-blue': '#7A9EAE',
-        'calm-blue-dark': '#6A8EAE',
-        'light-bg': '#EBF2F7',
-        'body-bg': '#f8f8f8',
-        'text-dark': '#333',
-        'text-medium': '#555',
-        'text-light': '#666',
-        // Ajoutez d'autres couleurs si nécessaire
+        'primary-header': '#E0F2F7', // Bleu très clair, aérien
+        'primary-text': '#2C4A5A',   // Bleu foncé doux pour les titres et le logo
+        'secondary-accent': '#7FCEDC', // Bleu aqua frais pour les accents (hover liens, focus formulaires)
+        'button-bg': '#5DBECF',    // Bleu apaisant pour les boutons
+        'button-hover-bg': '#48A0B0', // Nuance plus foncée au survol
+        'body-bg': '#FDFEFF',        // Fond presque blanc pour le corps
+        'section-bg': '#F0F8FA',     // Fond de section clair
+        'card-border': '#ADDCE6',    // Bordure de carte plus claire
+        'text-dark': '#3A3A3A',      // Texte principal foncé
+        'text-medium': '#6A6A6A',    // Texte secondaire
+        'text-light': '#9ABBDD',     // Texte léger, pour les liens secondaires ou infos
       },
       fontFamily: {
         sans: ['Open Sans', 'Arial', 'sans-serif'],

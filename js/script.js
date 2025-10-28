@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mainNav.classList.toggle('top-full');
             mainNav.classList.toggle('left-0');
             mainNav.classList.toggle('w-full');
-            mainNav.classList.toggle('bg-primary-blue');
+            mainNav.classList.toggle('bg-primary-header'); // Use new primary header color
             mainNav.classList.toggle('shadow-lg');
             mainNav.classList.toggle('py-4');
             mainNav.classList.toggle('space-y-2'); // Add spacing for mobile links
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('resize', () => {
             if (window.innerWidth >= 1024) { // Tailwind's 'lg' breakpoint
                 mainNav.classList.add('hidden'); // Ensure it's hidden when resizing from mobile
-                mainNav.classList.remove('flex', 'flex-col', 'absolute', 'top-full', 'left-0', 'w-full', 'bg-primary-blue', 'shadow-lg', 'py-4', 'space-y-2', 'z-50'); // Remove z-50
+                mainNav.classList.remove('flex', 'flex-col', 'absolute', 'top-full', 'left-0', 'w-full', 'bg-primary-header', 'shadow-lg', 'py-4', 'space-y-2', 'z-50'); // Remove z-50
                 hamburgerBtn.setAttribute('aria-expanded', 'false');
 
                 // Reset hamburger icon
