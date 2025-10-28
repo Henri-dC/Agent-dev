@@ -1,0 +1,10 @@
+# top-of-file-mark
+root = true
+
+[*]
+indent_style = space      # Utiliser des espaces (jamais de tabulations)
+indent_size = 2          # Indenter avec 2 espaces (standard Vue)
+charset = utf-8           # Forcer l'encodage UTF-8 (élimine les problèmes d'accent)
+trim_trailing_whitespace = true  # Supprimer les espaces en fin de ligne (souvent problématiques)
+insert_final_newline = true      # S'assurer que le fichier se termine par une ligne vide
+end_of_line = lf          # Forcer les sauts de ligne de style Unix (LF), recommandés par Git
