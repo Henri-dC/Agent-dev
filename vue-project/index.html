@@ -41,14 +41,53 @@
             text-align: center;
             margin-top: 20px;
         }
+
+        /* Styles et animation pour le point blanc */
+        .animated-dot {
+            position: fixed; /* Pour qu'il bouge sur toute la page et reste visible même en scrollant */
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%; /* Pour faire un cercle */
+            top: 0;
+            left: 0;
+            animation: moveDot 8s linear infinite; /* 8 secondes, linéaire, se répète à l'infini */
+            z-index: 9999; /* S'assure que le point est au-dessus des autres éléments */
+        }
+
+        @keyframes moveDot {
+            0% {
+                top: 0;
+                left: 0;
+            }
+            25% {
+                top: 0;
+                left: calc(100vw - 20px); /* Va en haut à droite (100% largeur - largeur du point) */
+            }
+            50% {
+                top: calc(100vh - 20px); /* Va en bas à droite (100% hauteur - hauteur du point) */
+                left: calc(100vw - 20px);
+            }
+            75% {
+                top: calc(100vh - 20px); /* Va en bas à gauche */
+                left: 0;
+            }
+            100% {
+                top: 0;
+                left: 0; /* Revient en haut à gauche */
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="animated-dot"></div>
+
     <header>
         <nav>
             <ul>
                 <li><a href="#vetements">Vêtements</a></li>
                 <li><a href="#accessoires">Accessoires</a></li>
+                <li><a href="#chaussures">Chaussures</a></li>
             </ul>
         </nav>
     </header>
