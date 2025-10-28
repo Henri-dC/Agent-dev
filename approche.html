@@ -4,60 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Approche - Dr. Clara Dubois</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
   </head>
-  <body>
-    <header>
-      <div class="container">
-        <h1><a href="index.html">Dr. Clara Dubois</a></h1>
-        <button class="hamburger-btn" aria-label="Ouvrir le menu de navigation">
-          <span class="hamburger-icon"></span>
-          <span class="hamburger-icon"></span>
-          <span class="hamburger-icon"></span>
+  <body class="font-sans bg-body-bg text-text-dark leading-relaxed">
+    <header class="bg-primary-blue text-white py-4 shadow-md relative">
+      <div class="container mx-auto px-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold"><a href="index.html" class="text-white no-underline">Dr. Clara Dubois</a></h1>
+        <button id="hamburger-btn" class="lg:hidden flex flex-col justify-around w-8 h-6 bg-transparent border-none cursor-pointer p-0 z-50 focus:outline-none" aria-label="Toggle navigation" aria-expanded="false">
+          <span class="block w-full h-0.5 bg-white rounded-sm transition-all duration-300 ease-in-out origin-top-left" id="bar1"></span>
+          <span class="block w-full h-0.5 bg-white rounded-sm transition-all duration-300 ease-in-out" id="bar2"></span>
+          <span class="block w-full h-0.5 bg-white rounded-sm transition-all duration-300 ease-in-out origin-bottom-left" id="bar3"></span>
         </button>
-        <nav class="main-nav">
-          <ul>
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="a-propos.html">À Propos</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="approche.html">Approche</a></li>
-            <li><a href="contact.html">Contact</a></li>
+        <nav id="main-nav" class="hidden lg:flex flex-grow justify-end">
+          <ul class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-6">
+            <li><a href="index.html" class="text-white font-semibold hover:text-light-blue transition-colors duration-300 block py-2 px-4">Accueil</a></li>
+            <li><a href="a-propos.html" class="text-white font-semibold hover:text-light-blue transition-colors duration-300 block py-2 px-4">À Propos</a></li>
+            <li><a href="services.html" class="text-white font-semibold hover:text-light-blue transition-colors duration-300 block py-2 px-4">Services</a></li>
+            <li><a href="approche.html" class="text-white font-semibold hover:text-light-blue transition-colors duration-300 block py-2 px-4">Approche</a></li>
+            <li><a href="contact.html" class="text-white font-semibold hover:text-light-blue transition-colors duration-300 block py-2 px-4">Contact</a></li>
           </ul>
         </nav>
       </div>
     </header>
 
     <main>
-      <section class="container content-section">
-        <h2>Mon Approche Thérapeutique : Intégrative et Centrée sur la Personne</h2>
-        <p class="lead-paragraph">Ma pratique s'inscrit dans une démarche intégrative, combinant plusieurs courants théoriques et techniques pour s'adapter au mieux à votre singularité.</p>
+      <section class="container mx-auto px-4 py-10 content-section">
+        <h2 class="text-2xl md:text-3xl font-bold text-primary-blue mb-8 text-center">Mon Approche Thérapeutique : Intégrative et Centrée sur la Personne</h2>
+        <p class="text-lg text-text-medium text-center max-w-3xl mx-auto mb-10">Ma pratique s'inscrit dans une démarche intégrative, combinant plusieurs courants théoriques et techniques pour s'adapter au mieux à votre singularité.</p>
 
-        <h3>La Thérapie Cognitive et Comportementale (TCC)</h3>
-        <div class="text-with-image">
-          <img src="https://via.placeholder.com/400x300?text=TCC+Therapie" alt="Thérapie Cognitive et Comportementale" class="content-image left">
-          <p>Les TCC sont des thérapies brèves et concrètes, axées sur l'identification et la modification des pensées (cognitions) et des comportements qui contribuent à la souffrance. Nous travaillerons ensemble à développer de nouvelles stratégies pour faire face aux situations difficiles, réduire l'anxiété, la dépression, ou gérer les phobies. L'accent est mis sur l'apprentissage de techniques et d'outils que vous pourrez utiliser au quotidien.</p>
+        <h3 class="text-xl font-semibold text-text-medium mt-8 mb-4">La Thérapie Cognitive et Comportementale (TCC)</h3>
+        <div class="flex flex-wrap items-center mb-10">
+          <img src="https://via.placeholder.com/400x300?text=TCC+Therapie" alt="Thérapie Cognitive et Comportementale" class="w-full md:w-2/5 lg:w-1/3 h-auto rounded-lg shadow-md mb-6 md:mb-0 md:mr-8 order-1 md:order-1">
+          <p class="md:flex-1 text-text-medium order-2 md:order-2">Les TCC sont des thérapies brèves et concrètes, axées sur l'identification et la modification des pensées (cognitions) et des comportements qui contribuent à la souffrance. Nous travaillerons ensemble à développer de nouvelles stratégies pour faire face aux situations difficiles, réduire l'anxiété, la dépression, ou gérer les phobies. L'accent est mis sur l'apprentissage de techniques et d'outils que vous pourrez utiliser au quotidien.</p>
         </div>
 
-        <h3>L'Approche Systémique</h3>
-        <div class="text-with-image">
-          <img src="https://via.placeholder.com/400x300?text=Systemique+Famille" alt="Approche Systémique" class="content-image right">
-          <p>L'approche systémique considère l'individu non pas de manière isolée, mais au sein de ses différents systèmes d'appartenance (familial, professionnel, social). Les difficultés rencontrées sont alors vues comme des symptômes d'un déséquilibre au sein du système. En thérapie, nous explorerons les interactions et les dynamiques relationnelles pour comprendre comment elles influencent votre vécu et comment des changements peuvent être initiés pour un meilleur équilibre.</p>
+        <h3 class="text-xl font-semibold text-text-medium mt-8 mb-4">L'Approche Systémique</h3>
+        <div class="flex flex-wrap items-center mb-10">
+          <img src="https://via.placeholder.com/400x300?text=Systemique+Famille" alt="Approche Systémique" class="w-full md:w-2/5 lg:w-1/3 h-auto rounded-lg shadow-md mb-6 md:mb-0 md:ml-8 order-2 md:order-2">
+          <p class="md:flex-1 text-text-medium order-1 md:order-1">L'approche systémique considère l'individu non pas de manière isolée, mais au sein de ses différents systèmes d'appartenance (familial, professionnel, social). Les difficultés rencontrées sont alors vues comme des symptômes d'un déséquilibre au sein du système. En thérapie, nous explorerons les interactions et les dynamiques relationnelles pour comprendre comment elles influencent votre vécu et comment des changements peuvent être initiés pour un meilleur équilibre.</p>
         </div>
 
-        <h3>L'Approche Humaniste</h3>
-        <p>Centrée sur la personne, l'approche humaniste met l'accent sur votre potentiel de croissance et d'auto-réalisation. Mon rôle est de vous accompagner avec empathie, écoute active et non-jugement, en vous aidant à vous connecter à vos propres ressources internes et à vos valeurs profondes. L'objectif est de favoriser votre autonomie et votre capacité à faire des choix alignés avec qui vous êtes réellement.</p>
+        <h3 class="text-xl font-semibold text-text-medium mt-8 mb-4">L'Approche Humaniste</h3>
+        <p class="mb-4 text-text-medium">Centrée sur la personne, l'approche humaniste met l'accent sur votre potentiel de croissance et d'auto-réalisation. Mon rôle est de vous accompagner avec empathie, écoute active et non-jugement, en vous aidant à vous connecter à vos propres ressources internes et à vos valeurs profondes. L'objectif est de favoriser votre autonomie et votre capacité à faire des choix alignés avec qui vous êtes réellement.</p>
 
-        <div class="call-to-action" style="margin-top: 40px;">
-          <h2>Une approche adaptée à vos besoins</h2>
-          <p>Mon objectif est de vous offrir un accompagnement sur mesure pour vous aider à atteindre vos objectifs thérapeutiques.</p>
-          <a href="contact.html" class="btn">Discutons-en</a>
+        <div class="bg-light-bg text-center p-12 rounded-lg mt-10">
+          <h2 class="text-2xl md:text-3xl font-bold text-primary-blue mb-4">Une approche adaptée à vos besoins</h2>
+          <p class="text-lg text-text-light mb-8">Mon objectif est de vous offrir un accompagnement sur mesure pour vous aider à atteindre vos objectifs thérapeutiques.</p>
+          <a href="contact.html" class="btn bg-calm-blue hover:bg-calm-blue-dark text-white py-3 px-6 rounded-md font-bold transition-colors duration-300 inline-block">Discutons-en</a>
         </div>
       </section>
     </main>
 
-    <footer>
-      <div class="container">
-        <p>&copy; 2023 Dr. Clara Dubois. Tous droits réservés.</p>
+    <footer class="bg-primary-blue text-white text-center py-6 mt-12">
+      <div class="container mx-auto px-4">
+        <p class="text-sm">&copy; 2023 Dr. Clara Dubois. Tous droits réservés.</p>
       </div>
     </footer>
     <script src="js/script.js" defer></script>

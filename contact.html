@@ -4,71 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Dr. Clara Dubois</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
   </head>
-  <body>
-    <header>
-      <div class="container">
-        <h1><a href="index.html">Dr. Clara Dubois</a></h1>
-        <button class="hamburger-btn" aria-label="Ouvrir le menu de navigation">
-          <span class="hamburger-icon"></span>
-          <span class="hamburger-icon"></span>
-          <span class="hamburger-icon"></span>
+  <body class="font-sans bg-body-bg text-text-dark leading-relaxed">
+    <header class="bg-primary-blue text-white py-4 shadow-md relative">
+      <div class="container mx-auto px-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold"><a href="index.html" class="text-white no-underline">Dr. Clara Dubois</a></h1>
+        <button id="hamburger-btn" class="lg:hidden flex flex-col justify-around w-8 h-6 bg-transparent border-none cursor-pointer p-0 z-50 focus:outline-none" aria-label="Toggle navigation" aria-expanded="false">
+          <span class="block w-full h-0.5 bg-white rounded-sm transition-all duration-300 ease-in-out origin-top-left" id="bar1"></span>
+          <span class="block w-full h-0.5 bg-white rounded-sm transition-all duration-300 ease-in-out" id="bar2"></span>
+          <span class="block w-full h-0.5 bg-white rounded-sm transition-all duration-300 ease-in-out origin-bottom-left" id="bar3"></span>
         </button>
-        <nav class="main-nav">
-          <ul>
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="a-propos.html">À Propos</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="approche.html">Approche</a></li>
-            <li><a href="contact.html">Contact</a></li>
+        <nav id="main-nav" class="hidden lg:flex flex-grow justify-end">
+          <ul class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-6">
+            <li><a href="index.html" class="text-white font-semibold hover:text-light-blue transition-colors duration-300 block py-2 px-4">Accueil</a></li>
+            <li><a href="a-propos.html" class="text-white font-semibold hover:text-light-blue transition-colors duration-300 block py-2 px-4">À Propos</a></li>
+            <li><a href="services.html" class="text-white font-semibold hover:text-light-blue transition-colors duration-300 block py-2 px-4">Services</a></li>
+            <li><a href="approche.html" class="text-white font-semibold hover:text-light-blue transition-colors duration-300 block py-2 px-4">Approche</a></li>
+            <li><a href="contact.html" class="text-white font-semibold hover:text-light-blue transition-colors duration-300 block py-2 px-4">Contact</a></li>
           </ul>
         </nav>
       </div>
     </header>
 
     <main>
-      <section class="container content-section">
-        <h2>Prendre Contact</h2>
-        <p class="lead-paragraph">Je suis à votre disposition pour répondre à vos questions ou pour fixer un premier rendez-vous. N'hésitez pas à me contacter par téléphone ou via le formulaire ci-dessous.</p>
+      <section class="container mx-auto px-4 py-10 content-section">
+        <h2 class="text-2xl md:text-3xl font-bold text-primary-blue mb-8 text-center">Prendre Contact</h2>
+        <p class="text-lg text-text-medium text-center max-w-3xl mx-auto mb-10">Je suis à votre disposition pour répondre à vos questions ou pour fixer un premier rendez-vous. N'hésitez pas à me contacter par téléphone ou via le formulaire ci-dessous.</p>
 
-        <div class="contact-info">
-          <p><strong>Téléphone :</strong> <a href="tel:+33123456789">01 23 45 67 89</a></p>
-          <p><strong>Email :</strong> <a href="mailto:clara.dubois.psy@email.com">clara.dubois.psy@email.com</a></p>
-          <p><strong>Adresse du cabinet :</strong><br>123 Rue de la Sérénité<br>75000 Paris, France</p>
+        <div class="text-center mb-10 text-lg">
+          <p class="mb-2"><strong>Téléphone :</strong> <a href="tel:+33123456789" class="text-calm-blue hover:underline">01 23 45 67 89</a></p>
+          <p class="mb-2"><strong>Email :</strong> <a href="mailto:clara.dubois.psy@email.com" class="text-calm-blue hover:underline">clara.dubois.psy@email.com</a></p>
+          <p class="mb-2"><strong>Adresse du cabinet :</strong><br>123 Rue de la Sérénité<br>75000 Paris, France</p>
         </div>
 
-        <h3>Formulaire de Contact</h3>
-        <form class="contact-form">
-          <div class="form-group">
-            <label for="name">Votre Nom :</label>
-            <input type="text" id="name" name="name" required>
+        <h3 class="text-xl font-semibold text-text-medium mt-8 mb-4 text-center">Formulaire de Contact</h3>
+        <form class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-md mb-12">
+          <div class="mb-5">
+            <label for="name" class="block mb-2 font-bold text-primary-blue">Votre Nom :</label>
+            <input type="text" id="name" name="name" required class="w-full p-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-calm-blue">
           </div>
-          <div class="form-group">
-            <label for="email">Votre Email :</label>
-            <input type="email" id="email" name="email" required>
+          <div class="mb-5">
+            <label for="email" class="block mb-2 font-bold text-primary-blue">Votre Email :</label>
+            <input type="email" id="email" name="email" required class="w-full p-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-calm-blue">
           </div>
-          <div class="form-group">
-            <label for="phone">Votre Téléphone (optionnel) :</label>
-            <input type="tel" id="phone" name="phone">
+          <div class="mb-5">
+            <label for="phone" class="block mb-2 font-bold text-primary-blue">Votre Téléphone (optionnel) :</label>
+            <input type="tel" id="phone" name="phone" class="w-full p-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-calm-blue">
           </div>
-          <div class="form-group">
-            <label for="message">Votre Message :</label>
-            <textarea id="message" name="message" rows="6" required></textarea>
+          <div class="mb-5">
+            <label for="message" class="block mb-2 font-bold text-primary-blue">Votre Message :</label>
+            <textarea id="message" name="message" rows="6" required class="w-full p-3 border border-gray-300 rounded-md text-base resize-y focus:outline-none focus:ring-2 focus:ring-calm-blue"></textarea>
           </div>
-          <button type="submit" class="btn">Envoyer le message</button>
+          <button type="submit" class="btn bg-calm-blue hover:bg-calm-blue-dark text-white py-3 px-6 rounded-md font-bold transition-colors duration-300 block w-auto mx-auto">Envoyer le message</button>
         </form>
 
-        <h3>Accès au Cabinet</h3>
-        <div class="map-container">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.991689254399!2d2.29229261567406!3d48.85837007928739!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e2964e59f49%3A0x6b772d9e6f6a9c3!2sTour%20Eiffel!5e0!3m2!1sfr!2sfr!4v1678901234567!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <h3 class="text-xl font-semibold text-text-medium mt-8 mb-4 text-center">Accès au Cabinet</h3>
+        <div class="overflow-hidden pb-[56.25%] relative h-0 rounded-lg shadow-md">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.991689254399!2d2.29229261567406!3d48.85837007928739!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e2964e59f49%3A0x6b772d9e6f6a9c3!2sTour%20Eiffel!5e0!3m2!1sfr!2sfr!4v1678901234567!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="absolute top-0 left-0 w-full h-full border-0"></iframe>
         </div>
       </section>
     </main>
 
-    <footer>
-      <div class="container">
-        <p>&copy; 2023 Dr. Clara Dubois. Tous droits réservés.</p>
+    <footer class="bg-primary-blue text-white text-center py-6 mt-12">
+      <div class="container mx-auto px-4">
+        <p class="text-sm">&copy; 2023 Dr. Clara Dubois. Tous droits réservés.</p>
       </div>
     </footer>
     <script src="js/script.js" defer></script>

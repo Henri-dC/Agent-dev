@@ -4,70 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dr. Clara Dubois - Psychothérapeute</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
   </head>
-  <body>
-    <header>
-      <div class="container">
-        <h1><a href="index.html">Dr. Clara Dubois</a></h1>
-        <button class="hamburger-btn" aria-label="Ouvrir le menu de navigation">
-          <span class="hamburger-icon"></span>
-          <span class="hamburger-icon"></span>
-          <span class="hamburger-icon"></span>
+  <body class="font-sans bg-body-bg text-text-dark leading-relaxed">
+    <header class="bg-primary-blue text-white py-4 shadow-md relative">
+      <div class="container mx-auto px-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold"><a href="index.html" class="text-white no-underline">Dr. Clara Dubois</a></h1>
+        <button id="hamburger-btn" class="lg:hidden flex flex-col justify-around w-8 h-6 bg-transparent border-none cursor-pointer p-0 z-50 focus:outline-none" aria-label="Toggle navigation" aria-expanded="false">
+          <span class="block w-full h-0.5 bg-white rounded-sm transition-all duration-300 ease-in-out origin-top-left" id="bar1"></span>
+          <span class="block w-full h-0.5 bg-white rounded-sm transition-all duration-300 ease-in-out" id="bar2"></span>
+          <span class="block w-full h-0.5 bg-white rounded-sm transition-all duration-300 ease-in-out origin-bottom-left" id="bar3"></span>
         </button>
-        <nav class="main-nav">
-          <ul>
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="a-propos.html">À Propos</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="approche.html">Approche</a></li>
-            <li><a href="contact.html">Contact</a></li>
+        <nav id="main-nav" class="hidden lg:flex flex-grow justify-end">
+          <ul class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-6">
+            <li><a href="index.html" class="text-white font-semibold hover:text-light-blue transition-colors duration-300 block py-2 px-4">Accueil</a></li>
+            <li><a href="a-propos.html" class="text-white font-semibold hover:text-light-blue transition-colors duration-300 block py-2 px-4">À Propos</a></li>
+            <li><a href="services.html" class="text-white font-semibold hover:text-light-blue transition-colors duration-300 block py-2 px-4">Services</a></li>
+            <li><a href="approche.html" class="text-white font-semibold hover:text-light-blue transition-colors duration-300 block py-2 px-4">Approche</a></li>
+            <li><a href="contact.html" class="text-white font-semibold hover:text-light-blue transition-colors duration-300 block py-2 px-4">Contact</a></li>
           </ul>
         </nav>
       </div>
     </header>
 
     <main>
-      <section class="hero">
-        <div class="container">
-          <h2>Un espace d'écoute et de soutien pour votre bien-être</h2>
-          <p>Je vous accompagne dans votre cheminement personnel, face aux défis de la vie, pour retrouver équilibre et sérénité.</p>
-          <a href="approche.html" class="btn">Découvrir mon approche</a>
+      <section class="relative bg-cover bg-center text-white text-center py-24 md:py-32 mb-8"
+        style="background-image: url('https://via.placeholder.com/1500x500/A7C4C2/FFFFFF?text=Bienvenue+dans+un+espace+serein');">
+        <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div class="container mx-auto px-4 relative z-10">
+          <h2 class="text-4xl md:text-5xl font-bold mb-4">Un espace d'écoute et de soutien pour votre bien-être</h2>
+          <p class="text-lg md:text-xl mb-8">Je vous accompagne dans votre cheminement personnel, face aux défis de la vie, pour retrouver équilibre et sérénité.</p>
+          <a href="approche.html" class="btn bg-calm-blue hover:bg-calm-blue-dark text-white py-3 px-6 rounded-md font-bold transition-colors duration-300 inline-block">Découvrir mon approche</a>
         </div>
       </section>
 
-      <section class="container text-center">
-        <h2>Pourquoi consulter un psychothérapeute ?</h2>
-        <div class="info-grid">
-          <div class="info-card">
-            <h3>Gérer l'anxiété et le stress</h3>
-            <p>Apprenez des stratégies efficaces pour apaiser votre esprit et retrouver la tranquillité.</p>
+      <section class="container mx-auto px-4 text-center py-10">
+        <h2 class="text-2xl md:text-3xl font-bold text-primary-blue mb-8">Pourquoi consulter un psychothérapeute ?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8 mb-12">
+          <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+            <h3 class="text-lg font-semibold text-primary-blue mb-2">Gérer l'anxiété et le stress</h3>
+            <p class="text-text-light text-sm">Apprenez des stratégies efficaces pour apaiser votre esprit et retrouver la tranquillité.</p>
           </div>
-          <div class="info-card">
-            <h3>Surmonter la dépression ou le deuil</h3>
-            <p>Un soutien bienveillant pour traverser les périodes difficiles et reconstruire votre quotidien.</p>
+          <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+            <h3 class="text-lg font-semibold text-primary-blue mb-2">Surmonter la dépression ou le deuil</h3>
+            <p class="text-text-light text-sm">Un soutien bienveillant pour traverser les périodes difficiles et reconstruire votre quotidien.</p>
           </div>
-          <div class="info-card">
-            <h3>Améliorer vos relations</h3>
-            <p>Développez une meilleure communication et des liens plus sains avec votre entourage.</p>
+          <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+            <h3 class="text-lg font-semibold text-primary-blue mb-2">Améliorer vos relations</h3>
+            <p class="text-text-light text-sm">Développez une meilleure communication et des liens plus sains avec votre entourage.</p>
           </div>
-          <div class="info-card">
-            <h3>Retrouver un sens à votre vie</h3>
-            <p>Explorez vos valeurs profondes et définissez de nouveaux objectifs pour un épanouissement durable.</p>
+          <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+            <h3 class="text-lg font-semibold text-primary-blue mb-2">Retrouver un sens à votre vie</h3>
+            <p class="text-text-light text-sm">Explorez vos valeurs profondes et définissez de nouveaux objectifs pour un épanouissement durable.</p>
           </div>
         </div>
       </section>
 
-      <section class="container call-to-action">
-        <h2>Prêt(e) à commencer votre cheminement ?</h2>
-        <p>N'hésitez pas à me contacter pour toute question ou pour prendre rendez-vous.</p>
-        <a href="contact.html" class="btn">Prendre rendez-vous</a>
+      <section class="container mx-auto px-4 bg-light-bg text-center py-12 rounded-lg my-12">
+        <h2 class="text-2xl md:text-3xl font-bold text-primary-blue mb-4">Prêt(e) à commencer votre cheminement ?</h2>
+        <p class="text-lg text-text-light mb-8">N'hésitez pas à me contacter pour toute question ou pour prendre rendez-vous.</p>
+        <a href="contact.html" class="btn bg-calm-blue hover:bg-calm-blue-dark text-white py-3 px-6 rounded-md font-bold transition-colors duration-300 inline-block">Prendre rendez-vous</a>
       </section>
     </main>
 
-    <footer>
-      <div class="container">
-        <p>&copy; 2023 Dr. Clara Dubois. Tous droits réservés.</p>
+    <footer class="bg-primary-blue text-white text-center py-6 mt-12">
+      <div class="container mx-auto px-4">
+        <p class="text-sm">&copy; 2023 Dr. Clara Dubois. Tous droits réservés.</p>
       </div>
     </footer>
     <script src="js/script.js" defer></script>

@@ -4,47 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>À Propos - Dr. Clara Dubois</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
   </head>
-  <body>
-    <header>
-      <div class="container">
-        <h1><a href="index.html">Dr. Clara Dubois</a></h1>
-        <button class="hamburger-btn" aria-label="Ouvrir le menu de navigation">
-          <span class="hamburger-icon"></span>
-          <span class="hamburger-icon"></span>
-          <span class="hamburger-icon"></span>
+  <body class="font-sans bg-body-bg text-text-dark leading-relaxed">
+    <header class="bg-primary-blue text-white py-4 shadow-md relative">
+      <div class="container mx-auto px-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold"><a href="index.html" class="text-white no-underline">Dr. Clara Dubois</a></h1>
+        <button id="hamburger-btn" class="lg:hidden flex flex-col justify-around w-8 h-6 bg-transparent border-none cursor-pointer p-0 z-50 focus:outline-none" aria-label="Toggle navigation" aria-expanded="false">
+          <span class="block w-full h-0.5 bg-white rounded-sm transition-all duration-300 ease-in-out origin-top-left" id="bar1"></span>
+          <span class="block w-full h-0.5 bg-white rounded-sm transition-all duration-300 ease-in-out" id="bar2"></span>
+          <span class="block w-full h-0.5 bg-white rounded-sm transition-all duration-300 ease-in-out origin-bottom-left" id="bar3"></span>
         </button>
-        <nav class="main-nav">
-          <ul>
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="a-propos.html">À Propos</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="approche.html">Approche</a></li>
-            <li><a href="contact.html">Contact</a></li>
+        <nav id="main-nav" class="hidden lg:flex flex-grow justify-end">
+          <ul class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-6">
+            <li><a href="index.html" class="text-white font-semibold hover:text-light-blue transition-colors duration-300 block py-2 px-4">Accueil</a></li>
+            <li><a href="a-propos.html" class="text-white font-semibold hover:text-light-blue transition-colors duration-300 block py-2 px-4">À Propos</a></li>
+            <li><a href="services.html" class="text-white font-semibold hover:text-light-blue transition-colors duration-300 block py-2 px-4">Services</a></li>
+            <li><a href="approche.html" class="text-white font-semibold hover:text-light-blue transition-colors duration-300 block py-2 px-4">Approche</a></li>
+            <li><a href="contact.html" class="text-white font-semibold hover:text-light-blue transition-colors duration-300 block py-2 px-4">Contact</a></li>
           </ul>
         </nav>
       </div>
     </header>
 
     <main>
-      <section class="container content-section">
-        <h2>Qui suis-je ?</h2>
-        <div class="text-with-image">
-          <img src="https://via.placeholder.com/400x300?text=Portrait+Dr+Dubois" alt="Portrait de Dr. Clara Dubois" class="content-image right">
-          <p>Je suis Dr. Clara Dubois, psychothérapeute diplômée, spécialisée dans l'accompagnement des adultes et des adolescents. Mon parcours est riche de plusieurs années d'expérience en cabinet libéral et en institutions de santé, où j'ai eu l'opportunité d'accompagner des personnes confrontées à diverses problématiques.</p>
-          <p>Ma formation initiale en psychologie clinique, complétée par des spécialisations en thérapies cognitives et comportementales (TCC) et en approche systémique, me permet de proposer une prise en charge intégrative, adaptée aux besoins spécifiques de chaque individu. Je suis également membre de l'association des psychothérapeutes agréés.</p>
+      <section class="container mx-auto px-4 py-10 content-section">
+        <h2 class="text-2xl md:text-3xl font-bold text-primary-blue mb-8 text-center">Qui suis-je ?</h2>
+        <div class="flex flex-wrap items-center mb-10">
+          <img src="https://via.placeholder.com/400x300?text=Portrait+Dr+Dubois" alt="Portrait de Dr. Clara Dubois" class="w-full md:w-2/5 lg:w-1/3 h-auto rounded-lg shadow-md mb-6 md:mb-0 md:ml-8 order-2 md:order-2">
+          <div class="md:flex-1 md:pr-8 order-1 md:order-1">
+            <p class="mb-4 text-text-medium">Je suis Dr. Clara Dubois, psychothérapeute diplômée, spécialisée dans l'accompagnement des adultes et des adolescents. Mon parcours est riche de plusieurs années d'expérience en cabinet libéral et en institutions de santé, où j'ai eu l'opportunité d'accompagner des personnes confrontées à diverses problématiques.</p>
+            <p class="mb-4 text-text-medium">Ma formation initiale en psychologie clinique, complétée par des spécialisations en thérapies cognitives et comportementales (TCC) et en approche systémique, me permet de proposer une prise en charge intégrative, adaptée aux besoins spécifiques de chaque individu. Je suis également membre de l'association des psychothérapeutes agréés.</p>
+          </div>
         </div>
 
-        <h2>Ma Philosophie</h2>
-        <p>Je crois en une approche thérapeutique qui place l'individu au centre de son propre processus de guérison et de développement. Mon rôle est de vous offrir un espace sûr, confidentiel et dénué de jugement, où vous pourrez explorer vos pensées, vos émotions et vos comportements. Ensemble, nous travaillerons à identifier les ressources qui sont déjà en vous et à développer de nouvelles stratégies pour faire face aux difficultés.</p>
-        <p>L'objectif de nos séances est de vous aider à mieux vous comprendre, à vous sentir plus aligné(e) avec vos valeurs et à construire une vie plus sereine et épanouissante. Chaque accompagnement est unique, respectueux de votre rythme et de vos objectifs personnels.</p>
+        <h2 class="text-2xl md:text-3xl font-bold text-primary-blue mb-8 text-center">Ma Philosophie</h2>
+        <p class="mb-4 text-text-medium">Je crois en une approche thérapeutique qui place l'individu au centre de son propre processus de guérison et de développement. Mon rôle est de vous offrir un espace sûr, confidentiel et dénué de jugement, où vous pourrez explorer vos pensées, vos émotions et vos comportements. Ensemble, nous travaillerons à identifier les ressources qui sont déjà en vous et à développer de nouvelles stratégies pour faire face aux difficultés.</p>
+        <p class="mb-4 text-text-medium">L'objectif de nos séances est de vous aider à mieux vous comprendre, à vous sentir plus aligné(e) avec vos valeurs et à construire une vie plus sereine et épanouissante. Chaque accompagnement est unique, respectueux de votre rythme et de vos objectifs personnels.</p>
       </section>
     </main>
 
-    <footer>
-      <div class="container">
-        <p>&copy; 2023 Dr. Clara Dubois. Tous droits réservés.</p>
+    <footer class="bg-primary-blue text-white text-center py-6 mt-12">
+      <div class="container mx-auto px-4">
+        <p class="text-sm">&copy; 2023 Dr. Clara Dubois. Tous droits réservés.</p>
       </div>
     </footer>
     <script src="js/script.js" defer></script>
