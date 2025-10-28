@@ -7,6 +7,7 @@
         <li><router-link to="/">Accueil</router-link></li>
         <li><router-link to="/chaussures">Chaussures</router-link></li>
         <li><router-link to="/vetements">Vêtements</router-link></li>
+        <li><router-link to="/tapis">Tapis</router-link></li>
       </ul>
     </nav>
   </header>
