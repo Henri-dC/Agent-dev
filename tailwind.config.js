@@ -2,35 +2,27 @@
 export default {
   content: [
     "./index.html",
-    "./a-propos.html",
-    "./approche.html",
-    "./contact.html",
-    "./services.html",
-    "./connexion-patient.html",
-    "./prendre-rdv.html",
-    "./js/script.js"
-    // Si les fichiers Vue sont pertinents, décommenter ci-dessous
-    // "./src/**/*.{vue,js,ts,jsx,tsx}",
+    "./js/**/*.js"
   ],
   theme: {
     extend: {
       colors: {
-        'primary-header': '#E0F2F7', // Bleu très clair, aérien
-        'primary-text': '#2C4A5A',   // Bleu foncé doux pour les titres et le logo
-        'secondary-accent': '#7FCEDC', // Bleu aqua frais pour les accents (hover liens, focus formulaires)
-        'button-bg': '#5DBECF',    // Bleu apaisant pour les boutons
-        'button-hover-bg': '#48A0B0', // Nuance plus foncée au survol
-        'body-bg': '#FDFEFF',        // Fond presque blanc pour le corps
-        'section-bg': '#F0F8FA',     // Fond de section clair
-        'card-border': '#ADDCE6',    // Bordure de carte plus claire
-        'text-dark': '#3A3A3A',      // Texte principal foncé
-        'text-medium': '#6A6A6A',    // Texte secondaire
-        'text-light': '#9ABBDD',     // Texte léger, pour les liens secondaires ou infos
+        'primary-header': '#E0F2F7',
+        'primary-text': '#2C4A5A',
+        'secondary-accent': '#7FCEDC',
+        'button-bg': '#5DBECF',
+        'button-hover-bg': '#48A0B0',
+        'body-bg': '#FDFEFF',
+        'section-bg': '#F0F8FA',
+        'card-border': '#ADDCE6',
+        'text-dark': '#3A3A3A',
+        'text-medium': '#6A6A6A',
+        'text-light': '#9ABBDD'
       },
       fontFamily: {
-        sans: ['Open Sans', 'Arial', 'sans-serif'],
+        sans: ['Open Sans', 'Arial', 'sans-serif']
       }
-    },
+    }
   },
-  plugins: [],
+  plugins: []
 }
