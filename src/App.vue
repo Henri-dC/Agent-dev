@@ -8,16 +8,60 @@ const toggleMenu = () => {
 </script>
 
 <template>
-  <header class="main-header">
-    <nav class="main-nav">
-      <button class="hamburger-button" @click="toggleMenu" :class="{ 'is-active': isMenuOpen }" aria-label="Toggle navigation">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
+  <!-- Header using Tailwind classes -->
+  <header class="bg-primary-text text-white py-4 shadow-md relative z-50">
+    <nav class="container mx-auto px-4 flex justify-between items-center">
+      <!-- Brand/Logo (placeholder, can be customized) -->
+      <router-link to="/" class="text-2xl font-bold text-white hover:text-secondary-accent transition-colors duration-300">
+        AIWordPlace
+      </router-link>
+
+      <!-- Hamburger button for mobile -->
+      <button class="lg:hidden flex flex-col justify-around w-8 h-6 bg-transparent border-none cursor-pointer p-0 focus:outline-none"
+              @click="toggleMenu"
+              :class="{ 'is-active': isMenuOpen }"
+              aria-label="Toggle navigation"
+              :aria-expanded="isMenuOpen ? 'true' : 'false'">
+        <span class="block w-full h-0.5 bg-white rounded-sm transition-all duration-300 ease-in-out origin-top-left"
+              :class="{ 'rotate-45 translate-x-1': isMenuOpen }"></span>
+        <span class="block w-full h-0.5 bg-white rounded-sm transition-all duration-300 ease-in-out"
+              :class="{ 'opacity-0': isMenuOpen }"></span>
+        <span class="block w-full h-0.5 bg-white rounded-sm transition-all duration-300 ease-in-out origin-bottom-left"
+              :class="{ '-rotate-45 translate-x-1': isMenuOpen }"></span>
       </button>
-      <ul :class="{ 'menu-open': isMenuOpen }">
-        <li><router-link to="/" @click="isMenuOpen = false">Accueil</router-link></li>
-        <li><router-link to="/chaussures" @click="isMenuOpen = false">Chaussures</router-link></li>
+
+      <!-- Navigation Menu -->
+      <ul class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-6
+                 absolute lg:static top-full left-0 w-full lg:w-auto
+                 bg-primary-text lg:bg-transparent shadow-lg lg:shadow-none py-4 lg:py-0
+                 transition-all duration-300 ease-in-out overflow-hidden"
+          :class="{ 'max-h-0 opacity-0 lg:max-h-full lg:opacity-100': !isMenuOpen,
+                    'max-h-screen opacity-100': isMenuOpen }">
+        <li>
+          <router-link to="/" @click="isMenuOpen = false"
+                       class="block py-2 px-4 text-white text-lg font-semibold
+                              hover:bg-secondary-accent lg:hover:bg-transparent lg:hover:text-secondary-accent
+                              transition-colors duration-300 rounded-md lg:rounded-none">
+            Accueil
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/chaussures" @click="isMenuOpen = false"
+                       class="block py-2 px-4 text-white text-lg font-semibold
+                              hover:bg-secondary-accent lg:hover:bg-transparent lg:hover:text-secondary-accent
+                              transition-colors duration-300 rounded-md lg:rounded-none">
+            Chaussures
+          </router-link>
+        </li>
+        <!-- ADDED: Products link -->
+        <li>
+          <router-link to="/products" @click="isMenuOpen = false"
+                       class="block py-2 px-4 text-white text-lg font-semibold
+                              hover:bg-secondary-accent lg:hover:bg-transparent lg:hover:text-secondary-accent
+                              transition-colors duration-300 rounded-md lg:rounded-none">
+            Produits
+          </router-link>
+        </li>
       </ul>
     </nav>
   </header>
@@ -26,153 +70,30 @@ const toggleMenu = () => {
 </template>
 
 <style>
-/* Styles globaux pour le body */
+/* Global styles for the body - using Tailwind colors */
 body {
-  background-color: #e0e0e0; /* Gris clair */
-  margin: 0;
-  min-height: 100vh; /* Assure que le fond couvre toute la hauteur de la fenêtre */
-  overflow-x: hidden; /* Empêche le défilement horizontal */
-}
-</style>
-
-<style scoped>
-.main-header {
-  background-color: #333;
-  padding: 10px 20px; /* Padding pour le header lui-même */
-  position: relative; /* Nécessaire pour positionner le menu déroulant */
-  z-index: 1000; /* Assure que le header est au-dessus du contenu */
-  display: flex; /* Utilise flexbox pour centrer le nav ou aligner des éléments */
-  justify-content: space-between; /* Place le menu et le bouton aux extrémités */
-  align-items: center;
+  @apply bg-body-bg m-0 min-h-screen overflow-x-hidden;
 }
 
-.main-nav {
-  width: 100%; /* Le nav prend toute la largeur du header */
-  display: flex;
-  justify-content: flex-end; /* Aligne les éléments à droite par défaut (desktop)
-  align-items: center;
+/* Base styles for router-link active state - make it consistent with hover */
+.router-link-exact-active {
+    @apply text-secondary-accent; /* Use secondary-accent for active links on desktop */
+}
+/* For mobile menu, active link might have different bg */
+@media (max-width: 1023px) { /* Adjust breakpoint if 'lg' is different */
+    .router-link-exact-active {
+        @apply bg-secondary-accent text-white; /* Active link has secondary-accent background on mobile */
+    }
 }
 
-.main-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: flex; /* Par défaut, les liens sont horizontaux sur desktop */
-  justify-content: center;
-  align-items: center;
-}
-
-.main-nav li a {
-  color: white;
-  padding: 10px 15px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-  display: block; /* Rend toute la zone cliquable */
-}
-
-.main-nav li a:hover,
-.main-nav li a.router-link-exact-active {
-  background-color: #575757;
-  border-radius: 5px;
-}
-
-/* Styles pour le bouton hamburger */
-.hamburger-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  z-index: 1001; /* Au-dessus du menu */
-  width: 30px;
-  height: 24px;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-end; /* Aligne les barres à droite si elles ne sont pas pleine largeur */
-  display: none; /* Caché par défaut, sera affiché sur mobile via media query */
-}
-
-.hamburger-button .bar {
-  display: block;
-  width: 100%; /* Les barres prennent toute la largeur du bouton */
-  height: 3px;
-  background-color: white;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-
-/* Animation du bouton hamburger */
-.hamburger-button.is-active .bar:nth-child(1) {
+/* Animation for hamburger button remains here as it's specific to the button state */
+.hamburger-button.is-active span:nth-child(1) {
   transform: translateY(10.5px) rotate(45deg);
 }
-.hamburger-button.is-active .bar:nth-child(2) {
+.hamburger-button.is-active span:nth-child(2) {
   opacity: 0;
 }
-.hamburger-button.is-active .bar:nth-child(3) {
+.hamburger-button.is-active span:nth-child(3) {
   transform: translateY(-10.5px) rotate(-45deg);
 }
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .main-nav {
-    justify-content: flex-end; /* Aligne le bouton hamburger à droite */
-  }
-
-  .hamburger-button {
-    display: flex; /* Visible sur mobile */
-  }
-
-  .main-nav ul {
-    display: flex; /* Toujours flex pour transition max-height */
-    flex-direction: column;
-    width: 100%;
-    position: absolute;
-    top: 100%; /* Sous le header */
-    left: 0;
-    background-color: #333;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    max-height: 0; /* Caché par défaut */
-    transition: max-height 0.3s ease-out;
-  }
-
-  .main-nav ul.menu-open {
-    max-height: 300px; /* Affiche le menu (hauteur suffisante pour tous les liens) */
-  }
-
-  .main-nav ul li {
-    width: 100%;
-    text-align: center;
-  }
-
-  .main-nav ul li a {
-    padding: 15px; /* Plus d'espace sur mobile */
-    border-bottom: 1px solid #575757; /* Séparateur */
-  }
-
-  .main-nav ul li:last-child a {
-    border-bottom: none;
-  }
-}
-
-@media (min-width: 769px) {
-  .main-nav {
-    justify-content: center; /* Centre le contenu du nav sur desktop */
-  }
-
-  .main-nav .hamburger-button {
-    display: none; /* Caché sur desktop */
-  }
-
-  .main-nav ul {
-    /* Assure que le menu est toujours visible et horizontal sur desktop */
-    display: flex;
-    position: static; /* Supprime le positionnement absolu */
-    max-height: none; /* Supprime la limite de hauteur */
-    background-color: transparent;
-    box-shadow: none;
-    flex-direction: row; /* Reviens à l'alignement horizontal */
-    justify-content: center; /* Centre les liens sur desktop */
-    width: auto; /* Permet aux liens de prendre leur largeur naturelle */
-  }
-}
+</style>
