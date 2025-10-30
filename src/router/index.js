@@ -8,6 +8,7 @@ import ApprocheView from '@/views/ApprocheView.vue'
 import ContactDocView from '@/views/ContactDocView.vue'
 import ConnexionPatientView from '@/views/ConnexionPatientView.vue'
 import CartView from '@/views/CartView.vue' // Import de la nouvelle vue Panier
+import CrmStockView from '@/views/CrmStockView.vue' // Import the new CRM stock view
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,6 +37,11 @@ const router = createRouter({
       path: '/cart',
       name: 'cart',
       component: CartView // Nouvelle route pour le panier
+    },
+    {
+      path: '/crm/stock', // New route path
+      name: 'crm-stock',
+      component: CrmStockView // Point to the new CRM stock view
     },
     {
       path: '/services',

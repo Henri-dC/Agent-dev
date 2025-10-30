@@ -10,9 +10,9 @@ let ctx;
 let particles = [];
 let animationFrameId;
 
-const numParticles = 80; // Number of particles
-const maxDistance = 120; // Max distance for lines to connect
-const particleSpeed = 0.5; // Speed of particles
+const numParticles = 100; // Increased number of particles for more density
+const maxDistance = 180; // Increased max distance for lines to connect for more visible connections
+const particleSpeed = 0.8; // Slightly increased speed of particles
 
 class Particle {
   constructor(x, y) {
@@ -20,7 +20,7 @@ class Particle {
     this.y = y;
     this.vx = Math.random() * particleSpeed * 2 - particleSpeed; // -speed to +speed
     this.vy = Math.random() * particleSpeed * 2 - particleSpeed;
-    this.radius = Math.random() * 1.5 + 0.5; // Smaller radius for subtle effect
+    this.radius = Math.random() * 2 + 1.5; // Increased radius for better visibility (from 0.8 to 3.5 max)
   }
 
   update() {
@@ -39,7 +39,7 @@ class Particle {
   draw() {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(127, 206, 220, 0.8)'; // secondary-accent with some opacity
+    ctx.fillStyle = 'rgba(44, 74, 90, 0.6)'; // Using primary-text color (darker) with 60% opacity for better contrast
     ctx.fill();
   }
 }
@@ -89,8 +89,8 @@ const animate = () => {
         ctx.moveTo(p1.x, p1.y);
         ctx.lineTo(p2.x, p2.y);
         const opacity = 1 - (dist / maxDistance);
-        ctx.strokeStyle = `rgba(127, 206, 220, ${opacity * 0.5})`; // secondary-accent with varying opacity
-        ctx.lineWidth = 0.8;
+        ctx.strokeStyle = `rgba(44, 74, 90, ${opacity * 0.4})`; // Using primary-text color with varying opacity, max 40%
+        ctx.lineWidth = 1; // Slightly increased line width
         ctx.stroke();
       }
     }

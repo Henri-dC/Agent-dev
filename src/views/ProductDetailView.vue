@@ -47,8 +47,6 @@ const addToCart = () => {
       price: product.value.price,
       imageUrl: product.value.images && product.value.images.length > 0 ? product.value.images[0].src : 'https://via.placeholder.com/150?text=No+Image'
     }, quantity.value);
-    alert(`${quantity.value} x ${product.value.name} ajouté au panier !`);
-    router.push('/cart'); // Redirige vers la page du panier
   }
 };
 </script>
@@ -58,7 +56,7 @@ const addToCart = () => {
     <button @click="$router.back()" class="mb-6 px-4 py-2 bg-button-bg text-white rounded-md hover:bg-button-hover-bg transition-colors duration-300">
         &larr; Retour aux produits
     </button>
-    <h1 class="text-4xl font-bold text-primary-text mb-8 text-center" v-if="!loading && !error">
+    <h1 class="text-3xl sm:text-4xl font-bold text-primary-text mb-8 text-center" v-if="!loading && !error">
         Détails du produit
     </h1>
 
@@ -70,14 +68,14 @@ const addToCart = () => {
         <div class="lg:w-1/2">
           <img :src="product.images && product.images.length > 0 ? product.images[0].src : 'https://via.placeholder.com/600x400?text=Image+Produit'"
                :alt="product.name"
-               class="w-full h-80 object-cover rounded-lg shadow-md">
+               class="w-full h-64 sm:h-72 md:h-80 object-cover rounded-lg shadow-md">
         </div>
 
         <!-- Product Details Section -->
         <div class="lg:w-1/2 flex flex-col justify-between">
           <div>
-            <h2 class="text-3xl font-bold text-text-dark mb-4">{{ product.name }}</h2>
-            <p class="text-2xl font-bold text-primary-text mb-6">{{ product.price }} €</p>
+            <h2 class="text-2xl sm:text-3xl font-bold text-text-dark mb-4">{{ product.name }}</h2>
+            <p class="text-xl sm:text-2xl font-bold text-primary-text mb-6">{{ product.price }} €</p>
             <div class="text-text-medium leading-relaxed mb-6" v-html="product.description || 'Pas de description disponible.'"></div>
           </div>
 
