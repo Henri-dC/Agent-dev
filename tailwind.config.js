@@ -2,9 +2,8 @@
 export default {
   content: [
     "./index.html",
-    "./js/**/*.js",
-    "./src/**/*.vue", // ADDED: to include Vue components
-    "./src/**/*.js"   // Good practice to include JS files in src if they contain Tailwind classes
+    "./src/**/*.vue",
+    "./src/**/*.js"
   ],
   theme: {
     extend: {
