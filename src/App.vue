@@ -1,5 +1,6 @@
 <script setup>
 import AppFooter from '@/components/AppFooter.vue';
+import BackgroundAnimation from '@/components/BackgroundAnimation.vue'; // Import the new component
 import { useCartStore } from '@/stores/cart'; // Import du store panier
 import { computed } from 'vue';
 
@@ -8,6 +9,9 @@ const cartItemCount = computed(() => cartStore.itemCount);
 </script>
 
 <template>
+  <!-- Background animation goes first, fixed and lowest z-index -->
+  <BackgroundAnimation />
+
   <!-- En-tête global -->
   <header class="w-full bg-body-bg bg-opacity-90 py-4 shadow-md sticky top-0 z-50">
     <div class="container mx-auto flex justify-between items-center px-6">
@@ -35,7 +39,7 @@ const cartItemCount = computed(() => cartStore.itemCount);
     </div>
   </header>
 
-  <div class="relative z-10 min-h-screen flex flex-col items-center">
+  <div class="relative z-10 min-h-screen flex flex-col items-center bg-body-bg bg-opacity-90"> <!-- Added bg-opacity-90 here -->
     <router-view />
   </div>
 
@@ -45,7 +49,7 @@ const cartItemCount = computed(() => cartStore.itemCount);
 
 <style>
 body {
-  @apply bg-body-bg m-0 min-h-screen overflow-x-hidden;
+  @apply m-0 min-h-screen overflow-x-hidden; /* Removed bg-body-bg from here */
 }
 
 .router-link-exact-active {

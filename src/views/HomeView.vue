@@ -38,6 +38,30 @@
       </div>
     </section>
 
+    <!-- Product Categories Section -->
+    <section class="w-full py-20 px-6 bg-body-bg bg-opacity-90 text-center">
+      <div class="container mx-auto">
+        <h2 class="text-5xl font-bold text-primary-text mb-12">Nos Catégories de Produits</h2>
+
+        <div v-if="loadingCategories" class="text-center text-lg text-text-medium">Chargement des catégories...</div>
+        <div v-else-if="errorCategories" class="text-center text-lg text-red-500">Erreur: {{ errorCategories }}</div>
+        <div v-else-if="categories.length === 0" class="text-center text-lg text-text-medium">Aucune catégorie de produit trouvée avec des images.</div>
+        <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div v-for="category in categories" :key="category.id"
+               class="bg-white rounded-lg shadow-lg overflow-hidden border border-card-border
+                      transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl">
+            <router-link :to="{ name: 'products', query: { category_id: category.id } }">
+              <img :src="category.image.src" :alt="category.name" class="w-full h-64 object-cover">
+              <div class="p-6">
+                <h3 class="text-2xl font-semibold text-text-dark mb-2">{{ category.name }}</h3>
+                <p class="text-text-medium">{{ category.count }} produits</p>
+              </div>
+            </router-link>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Features Section -->
     <section id="features" class="w-full py-20 px-6 bg-body-bg bg-opacity-90 text-center">
       <div class="container mx-auto">
@@ -120,7 +144,28 @@
 </template>
 
 <script setup>
-// Pas de logique spécifique nécessaire pour cette vue Home
+import { ref, onMounted } from 'vue';
+
+const categories = ref([]);
+const loadingCategories = ref(true);
+const errorCategories = ref(null);
+
+onMounted(async () => {
+  try {
+    const response = await fetch('http://localhost:3000/api/product-categories?per_page=6'); // Fetch a few categories
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    // Filter categories that have an image and a non-zero count
+    categories.value = data.filter(cat => cat.image && cat.image.src && cat.count > 0);
+  } catch (e) {
+    console.error("Error fetching product categories:", e);
+    errorCategories.value = e.message;
+  } finally {
+    loadingCategories.value = false;
+  }
+});
 </script>
 
 <style scoped>
