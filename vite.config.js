@@ -1,8 +1,16 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+// vite.config.js (APRÈS correction)
+import { fileURLToPath, URL } from "node:url"; // Import pour gérer les chemins
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
 
-// https://vitejs.dev/config/
 export default defineConfig({
+  base: "/preview/",
   plugins: [vue()],
-  resolve: {}
-})
+  // --- AJOUTER CETTE SECTION ---
+  resolve: {
+    alias: {
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+    },
+  },
+  // -----------------------------
+});
