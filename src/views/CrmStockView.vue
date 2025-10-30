@@ -29,13 +29,22 @@ onMounted(async () => {
 const adjustStock = (product, adjustment) => {
   let newStock = product.stock_quantity + adjustment;
   if (newStock < 0) newStock = 0; // Prevent negative stock
+  
+  // Optimistically update the product's stock_quantity directly in the component's filteredProducts
+  // This will reflect in the v-model input field immediately
+  const productInFilteredList = filteredProducts.value.find(p => p.id === product.id);
+  if (productInFilteredList) {
+    productInFilteredList.stock_quantity = newStock;
+  }
   crmStockStore.updateProductStock(product.id, newStock);
 };
 
-const handleStockInputChange = (product, event) => {
-  let newStock = parseInt(event.target.value, 10);
+const updateStockOnBlur = (product) => {
+  // v-model.number already parsed it to number or NaN
+  let newStock = product.stock_quantity;
   if (isNaN(newStock) || newStock < 0) {
-    newStock = 0; // Default to 0 or product's current stock if invalid
+    newStock = 0; // Default to 0 if invalid or negative
+    product.stock_quantity = newStock; // Update local model immediately to reflect 0 in the input
   }
   crmStockStore.updateProductStock(product.id, newStock);
 };
@@ -46,7 +55,7 @@ const handleManageStockChange = (product) => {
 </script>
 
 <template>
-  <div class="container mx-auto px-4 py-8 bg-body-bg min-h-screen">
+  <div class="container mx-auto px-4 py-8 bg-transparent min-h-screen">
     <h1 class="text-3xl sm:text-4xl font-bold text-primary-text mb-8 text-center">Gestion des Stocks CRM</h1>
 
     <div class="mb-6">
@@ -104,8 +113,9 @@ const handleManageStockChange = (product) => {
             <td class="px-3 py-4 whitespace-nowrap text-sm text-text-medium">
               <input
                 type="number"
-                :value="product.stock_quantity"
-                @change="handleStockInputChange(product, $event)"
+                v-model.number="product.stock_quantity"
+                @blur="updateStockOnBlur(product)"
+                @keyup.enter="updateStockOnBlur(product)"
                 :disabled="!product.manage_stock"
                 class="w-16 sm:w-20 p-1 border border-gray-300 rounded-md text-center text-text-dark disabled:bg-gray-100"
               />

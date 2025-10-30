@@ -8,17 +8,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        'primary-header': '#E0F2F7',
-        'primary-text': '#2C4A5A',
-        'secondary-accent': '#7FCEDC',
-        'button-bg': '#5DBECF',
-        'button-hover-bg': '#48A0B0',
-        'body-bg': '#FDFEFF',
-        'section-bg': '#F0F8FA',
-        'card-border': '#ADDCE6',
-        'text-dark': '#3A3A3A',
-        'text-medium': '#6A6A6A',
-        'text-light': '#9ABBDD'
+        'primary-header': '#FFFFFF', // Plus clair pour contraster avec les nouveaux fonds
+        'primary-text': '#1A202C',   // Très sombre pour haute lisibilité
+        'secondary-accent': '#38B2AC', // Un teal plus vibrant
+        'button-bg': '#3182CE',      // Un bleu plus fort pour les boutons
+        'button-hover-bg': '#2C5282', // Un bleu plus foncé pour le survol des boutons
+        'body-bg': '#F9FAFB',        // Gris très clair, presque blanc
+        'section-bg': '#EBF4F7',     // Un bleu-gris clair distinct pour les sections
+        'card-border': '#CBD5E0',    // Gris clair pour les bordures de cartes
+        'text-dark': '#2D3748',      // Gris foncé pour les titres
+        'text-medium': '#4A5568',    // Gris moyen pour le texte courant
+        'text-light': '#718096'      // Gris plus clair pour les détails
       },
       fontFamily: {
         sans: ['Open Sans', 'Arial', 'sans-serif']

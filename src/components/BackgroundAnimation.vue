@@ -7,57 +7,82 @@ import { ref, onMounted, onUnmounted } from 'vue';
 
 const animationCanvas = ref(null);
 let ctx;
-let particles = [];
+let bubbles = []; // Renommé de particles à bubbles
 let animationFrameId;
 
-const numParticles = 100; // Increased number of particles for more density
-const maxDistance = 180; // Increased max distance for lines to connect for more visible connections
-const particleSpeed = 0.8; // Slightly increased speed of particles
+const numBubbles = 40; // Nombre de bulles
+const bubbleMinRadius = 8; // Rayon minimum des bulles
+const bubbleMaxRadius = 25; // Rayon maximum des bulles
+const bubbleMinSpeedY = 0.3; // Vitesse de remontée minimale
+const bubbleMaxSpeedY = 1.0; // Vitesse de remontée maximale
+const bubbleSpeedX = 0.3; // Dérive latérale maximale
+const bubbleColorR = 56;  // Nouvelle composante R de #38B2AC (secondary-accent)
+const bubbleColorG = 178; // Nouvelle composante G de #38B2AC
+const bubbleColorB = 172; // Nouvelle composante B de #38B2AC
 
-class Particle {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-    this.vx = Math.random() * particleSpeed * 2 - particleSpeed; // -speed to +speed
-    this.vy = Math.random() * particleSpeed * 2 - particleSpeed;
-    this.radius = Math.random() * 2 + 1.5; // Increased radius for better visibility (from 0.8 to 3.5 max)
+class Bubble {
+  constructor(canvasWidth, canvasHeight) {
+    this.reset(canvasWidth, canvasHeight);
   }
 
-  update() {
+  reset(canvasWidth, canvasHeight) {
+    this.radius = Math.random() * (bubbleMaxRadius - bubbleMinRadius) + bubbleMinRadius;
+    this.x = Math.random() * canvasWidth;
+    this.y = canvasHeight + this.radius; // Commencer juste en dessous de l'écran
+    this.vx = (Math.random() - 0.5) * bubbleSpeedX * 2; // Dérive latérale légère (-bubbleSpeedX à +bubbleSpeedX)
+    this.vy = Math.random() * (bubbleMaxSpeedY - bubbleMinSpeedY) + bubbleMinSpeedY; // Vitesse de remontée
+    this.alpha = Math.random() * 0.4 + 0.2; // Opacité initiale (0.2 à 0.6)
+    this.rotation = Math.random() * Math.PI * 2; // Rotation initiale
+    this.rotationSpeed = (Math.random() - 0.5) * 0.01; // Vitesse de rotation légère
+  }
+
+  update(canvasWidth, canvasHeight) {
+    this.y -= this.vy;
     this.x += this.vx;
-    this.y += this.vy;
+    this.rotation += this.rotationSpeed;
 
-    // Bounce off edges
-    if (this.x < 0 || this.x > ctx.canvas.width) {
-      this.vx *= -1;
+    // Fade out as it reaches the top 20% of the screen
+    const fadeStart = canvasHeight * 0.2;
+    if (this.y < fadeStart) {
+      this.alpha = Math.max(0, this.alpha - 0.005); // Diminuer progressivement l'opacité
     }
-    if (this.y < 0 || this.y > ctx.canvas.height) {
-      this.vy *= -1;
+
+    // Wrap around horizontally
+    if (this.x < -this.radius) {
+      this.x = canvasWidth + this.radius;
+    } else if (this.x > canvasWidth + this.radius) {
+      this.x = -this.radius;
+    }
+
+    // Reset if it goes off screen (top) or becomes completely transparent
+    if (this.y < -this.radius || this.alpha <= 0) {
+      this.reset(canvasWidth, canvasHeight);
     }
   }
 
-  draw() {
+  draw(ctx) {
+    ctx.save();
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.rotation);
     ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(44, 74, 90, 0.6)'; // Using primary-text color (darker) with 60% opacity for better contrast
+    ctx.arc(0, 0, this.radius, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${bubbleColorR}, ${bubbleColorG}, ${bubbleColorB}, ${this.alpha})`;
     ctx.fill();
+    ctx.restore();
   }
 }
 
 const initCanvas = () => {
-  if (!animationCanvas.value) return; // Ensure canvas element exists
+  if (!animationCanvas.value) return;
 
   ctx = animationCanvas.value.getContext('2d');
   resizeCanvas();
   window.addEventListener('resize', resizeCanvas);
 
-  particles = [];
-  for (let i = 0; i < numParticles; i++) {
-    particles.push(
-      new Particle(
-        Math.random() * ctx.canvas.width,
-        Math.random() * ctx.canvas.height
-      )
+  bubbles = [];
+  for (let i = 0; i < numBubbles; i++) {
+    bubbles.push(
+      new Bubble(ctx.canvas.width, ctx.canvas.height)
     );
   }
 
@@ -73,27 +98,11 @@ const resizeCanvas = () => {
 
 const animate = () => {
   animationFrameId = requestAnimationFrame(animate);
-  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // Clear only the canvas
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-  for (let i = 0; i < particles.length; i++) {
-    particles[i].update();
-    particles[i].draw();
-
-    for (let j = i + 1; j < particles.length; j++) {
-      const p1 = particles[i];
-      const p2 = particles[j];
-      const dist = Math.hypot(p1.x - p2.x, p1.y - p2.y);
-
-      if (dist < maxDistance) {
-        ctx.beginPath();
-        ctx.moveTo(p1.x, p1.y);
-        ctx.lineTo(p2.x, p2.y);
-        const opacity = 1 - (dist / maxDistance);
-        ctx.strokeStyle = `rgba(44, 74, 90, ${opacity * 0.4})`; // Using primary-text color with varying opacity, max 40%
-        ctx.lineWidth = 1; // Slightly increased line width
-        ctx.stroke();
-      }
-    }
+  for (let i = 0; i < bubbles.length; i++) {
+    bubbles[i].update(ctx.canvas.width, ctx.canvas.height);
+    bubbles[i].draw(ctx);
   }
 };
 

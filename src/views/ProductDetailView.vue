@@ -52,7 +52,7 @@ const addToCart = () => {
 </script>
 
 <template>
-  <div class="container mx-auto px-4 py-8 bg-body-bg min-h-screen">
+  <div class="container mx-auto px-4 py-8 bg-transparent min-h-screen">
     <button @click="$router.back()" class="mb-6 px-4 py-2 bg-button-bg text-white rounded-md hover:bg-button-hover-bg transition-colors duration-300">
         &larr; Retour aux produits
     </button>

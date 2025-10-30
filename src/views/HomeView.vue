@@ -39,7 +39,7 @@
     </section>
 
     <!-- Product Categories Section -->
-    <section class="w-full py-16 sm:py-20 px-4 sm:px-6 bg-body-bg bg-opacity-90 text-center">
+    <section class="w-full py-16 sm:py-20 px-4 sm:px-6 bg-transparent text-center"> <!-- Changed bg-body-bg bg-opacity-90 to bg-transparent -->
       <div class="container mx-auto">
         <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-primary-text mb-8 sm:mb-12">Nos Catégories de Produits</h2>
 
@@ -63,7 +63,7 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="w-full py-16 sm:py-20 px-4 sm:px-6 bg-body-bg bg-opacity-90 text-center">
+    <section id="features" class="w-full py-16 sm:py-20 px-4 sm:px-6 bg-transparent text-center"> <!-- Changed bg-body-bg bg-opacity-90 to bg-transparent -->
       <div class="container mx-auto">
         <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-primary-text mb-8 sm:mb-12">Fonctionnalités Clés</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-10">
@@ -92,7 +92,7 @@
     </section>
 
     <!-- How It Works Section -->
-    <section id="how-it-works" class="w-full py-16 sm:py-20 px-4 sm:px-6 bg-section-bg bg-opacity-95 text-center">
+    <section id="how-it-works" class="w-full py-16 sm:py-20 px-4 sm:px-6 bg-transparent text-center"> <!-- Changed bg-section-bg bg-opacity-95 to bg-transparent -->
       <div class="container mx-auto max-w-4xl">
         <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-primary-text mb-8 sm:mb-12">Comment ça Marche ?</h2>
         <div class="grid grid-cols-1 gap-8 sm:gap-12 text-left">
@@ -129,7 +129,7 @@
     </section>
 
     <!-- Final Call to Action Section -->
-    <section id="cta" class="w-full py-16 sm:py-20 px-4 sm:px-6 bg-body-bg bg-opacity-90 text-center">
+    <section id="cta" class="w-full py-16 sm:py-20 px-4 sm:px-6 bg-transparent text-center"> <!-- Changed bg-body-bg bg-opacity-90 to bg-transparent -->
       <div class="container mx-auto max-w-3xl">
         <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-primary-text mb-6 sm:mb-8">Prêt à Transformer vos Idées en Réalité ?</h2>
         <p class="text-base sm:text-lg text-text-dark mb-8 sm:mb-10">

@@ -34,7 +34,7 @@ const addToCart = (product) => {
 </script>
 
 <template>
-  <div class="container mx-auto px-4 py-8 bg-body-bg min-h-screen">
+  <div class="container mx-auto px-4 py-8 bg-transparent min-h-screen">
     <h1 class="text-3xl sm:text-4xl font-bold text-primary-text mb-8 text-center">Nos Produits</h1>
 
     <div v-if="loading" class="text-center text-lg text-text-medium">Chargement des produits...</div>

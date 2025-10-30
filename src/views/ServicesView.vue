@@ -1,5 +1,5 @@
 <template>
-  <div class="page-content container mx-auto px-4 py-10 bg-body-bg min-h-[calc(100vh-180px)]">
+  <div class="page-content container mx-auto px-4 py-10 bg-transparent min-h-[calc(100vh-180px)]">
     <h2 class="text-2xl md:text-3xl font-bold text-primary-text mb-8 text-center">Mes Services et Accompagnements</h2>
     <p class="text-lg text-text-medium text-center max-w-3xl mx-auto mb-10">Je propose un accompagnement psychothérapeutique personnalisé pour les adultes et les adolescents, adapté à vos besoins et à votre situation.</p>
 
