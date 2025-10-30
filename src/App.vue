@@ -53,13 +53,22 @@ const toggleMenu = () => {
             Chaussures
           </router-link>
         </li>
-        <!-- ADDED: Products link -->
+        <!-- Link to the products list page -->
         <li>
           <router-link to="/products" @click="isMenuOpen = false"
                        class="block py-2 px-4 text-white text-lg font-semibold
                               hover:bg-secondary-accent lg:hover:bg-transparent lg:hover:text-secondary-accent
                               transition-colors duration-300 rounded-md lg:rounded-none">
-            Produits
+            Produits (Liste)
+          </router-link>
+        </li>
+        <!-- ADDED: Example Product Detail link (for testing/demonstration) -->
+        <li>
+          <router-link to="/products/1" @click="isMenuOpen = false"
+                       class="block py-2 px-4 text-white text-lg font-semibold
+                              hover:bg-secondary-accent lg:hover:bg-transparent lg:hover:text-secondary-accent
+                              transition-colors duration-300 rounded-md lg:rounded-none">
+            Produit (Exemple ID:1)
           </router-link>
         </li>
       </ul>
