@@ -7,6 +7,7 @@ import AProposView from '@/views/AProposView.vue'
 import ApprocheView from '@/views/ApprocheView.vue'
 import ContactDocView from '@/views/ContactDocView.vue'
 import ConnexionPatientView from '@/views/ConnexionPatientView.vue'
+import CartView from '@/views/CartView.vue' // Import de la nouvelle vue Panier
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,6 +31,11 @@ const router = createRouter({
       path: '/products/:id',
       name: 'product-detail',
       component: ProductDetailView
+    },
+    {
+      path: '/cart',
+      name: 'cart',
+      component: CartView // Nouvelle route pour le panier
     },
     {
       path: '/services',

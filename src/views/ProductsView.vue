@@ -1,9 +1,11 @@
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useCartStore } from '@/stores/cart'; // Import du store panier
 
 const products = ref([]);
 const loading = ref(true);
 const error = ref(null);
+const cartStore = useCartStore(); // Utilisation du store panier
 
 onMounted(async () => {
   try {
@@ -20,6 +22,16 @@ onMounted(async () => {
     loading.value = false;
   }
 });
+
+const addToCart = (product) => {
+  cartStore.addItem({
+    id: product.id,
+    name: product.name,
+    price: product.price,
+    imageUrl: product.images && product.images.length > 0 ? product.images[0].src : 'https://via.placeholder.com/150?text=No+Image'
+  });
+  alert(`${product.name} ajouté au panier !`);
+};
 </script>
 
 <template>
@@ -33,15 +45,20 @@ onMounted(async () => {
       <div v-for="product in products" :key="product.id"
            class="bg-white rounded-lg shadow-lg overflow-hidden border border-card-border
                   transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl">
-        <img :src="product.imageUrl" :alt="product.name" class="w-full h-48 object-cover">
+        <img :src="product.images && product.images.length > 0 ? product.images[0].src : 'https://via.placeholder.com/400x300?text=No+Image'" :alt="product.name" class="w-full h-48 object-cover">
         <div class="p-6">
           <h2 class="text-xl font-semibold text-text-dark mb-2">{{ product.name }}</h2>
-          <p class="text-primary-text text-2xl font-bold mb-4">{{ product.price }}</p>
-          <p class="text-text-medium text-sm mb-4">{{ product.description }}</p>
-          <button class="w-full py-2 px-4 rounded-md bg-button-bg text-white font-medium
+          <p class="text-primary-text text-2xl font-bold mb-4">{{ product.price }} €</p>
+          <p class="text-text-medium text-sm mb-4" v-html="product.short_description || product.description"></p>
+          <button @click="addToCart(product)" class="w-full py-2 px-4 rounded-md bg-button-bg text-white font-medium
                          hover:bg-button-hover-bg transition-colors duration-300">
             Ajouter au panier
           </button>
+          <router-link :to="{ name: 'product-detail', params: { id: product.id } }"
+                       class="mt-2 w-full py-2 px-4 rounded-md bg-secondary-accent text-white font-medium
+                              hover:bg-button-hover-bg transition-colors duration-300 block text-center">
+            Voir Détails
+          </router-link>
         </div>
       </div>
     </div>
