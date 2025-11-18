@@ -1,0 +1,50 @@
+ * Serving Flask app 'app'
+ * Debug mode: on
+[INFO] app.routes.api - Setup complet des workspaces...
+[INFO] app.services.workspace_service - === Initialisation des workspaces ===
+[INFO] app.services.workspace_service - Configuration du workspace dev...
+[INFO] app.services.workspace_service - Workspace dev existe déjà
+[INFO] app.services.workspace_service - Configuration du workspace backend_dev...
+[INFO] app.services.workspace_service - Copie du backend WordPress depuis C:\Users\PC\VSC Dosss\Agent dev\IA\templates_backend\wordpress_api...
+[ERROR] app.services.workspace_service - Erreur lors de la configuration des workspaces: [WinError 5] Accès refusé: 'C:\\Users\\PC\\VSC Dosss\\Agent dev\\WORDPRESS\\backend_dev\\.git\\objects\\00\\11e9d65fcaefeaccd7c79a0357e8f2214695ed'
+Traceback (most recent call last):
+  File "C:\Users\PC\VSC Dosss\Agent dev\IA\app\services\workspace_service.py", line 30, in setup_all
+    self._setup_backend_workspace()
+  File "C:\Users\PC\VSC Dosss\Agent dev\IA\app\services\workspace_service.py", line 126, in _setup_backend_workspace       
+    self._setup_wordpress_backend()
+  File "C:\Users\PC\VSC Dosss\Agent dev\IA\app\services\workspace_service.py", line 153, in _setup_wordpress_backend       
+    shutil.rmtree(item)
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 796, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 631, in _rmtree_unsafe
+    _rmtree_unsafe(fullname, onexc)
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 631, in _rmtree_unsafe
+    _rmtree_unsafe(fullname, onexc)
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 636, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 634, in _rmtree_unsafe
+    os.unlink(fullname)
+PermissionError: [WinError 5] Accès refusé: 'C:\\Users\\PC\\VSC Dosss\\Agent dev\\WORDPRESS\\backend_dev\\.git\\objects\\00\\11e9d65fcaefeaccd7c79a0357e8f2214695ed'
+[ERROR] app.routes.api - Erreur lors du setup
+Traceback (most recent call last):
+  File "C:\Users\PC\VSC Dosss\Agent dev\IA\app\routes\api.py", line 357, in setup_and_start
+    _workspace_service.setup_all()
+  File "C:\Users\PC\VSC Dosss\Agent dev\IA\app\services\workspace_service.py", line 30, in setup_all
+    self._setup_backend_workspace()
+  File "C:\Users\PC\VSC Dosss\Agent dev\IA\app\services\workspace_service.py", line 126, in _setup_backend_workspace       
+    self._setup_wordpress_backend()
+  File "C:\Users\PC\VSC Dosss\Agent dev\IA\app\services\workspace_service.py", line 153, in _setup_wordpress_backend       
+    shutil.rmtree(item)
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 796, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 631, in _rmtree_unsafe
+    _rmtree_unsafe(fullname, onexc)
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 631, in _rmtree_unsafe
+    _rmtree_unsafe(fullname, onexc)
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 636, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 634, in _rmtree_unsafe
+    os.unlink(fullname)
+PermissionError: [WinError 5] Accès refusé: 'C:\\Users\\PC\\VSC Dosss\\Agent dev\\WORDPRESS\\backend_dev\\.git\\objects\\00\\11e9d65fcaefeaccd7c79a0357e8f2214695ed'

@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IDE - AgentDev</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <style>
+      .sidebar {
+        width: 380px;
+        transition: width 0.3s ease, padding 0.3s ease;
+        padding: 0;
+        flex-shrink: 0;
+      }
+      .app-layout.sidebar-collapsed .sidebar {
+        width: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      .sidebar-content,
+      .sidebar-footer {
+        min-width: 380px;
+      }
+
+      .sidebar-content {
+        overflow-y: auto;
+        flex-grow: 1;
+        padding: 2rem;
+      }
+      .sidebar-footer {
+        flex-shrink: 0;
+        padding: 2rem;
+        border-top: 1px solid var(--border-primary);
+      }
+
+      .main-content {
+        position: relative;
+        padding: 0;
+        display: flex;
+        flex-direction: column; /* Permet aux enfants de s'étendre verticalement */
+        flex-grow: 1;
+      }
+      #toggle-sidebar-btn {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        z-index: 10;
+        background-color: var(--bg-surface);
+        color: var(--text-secondary);
+        border: 1px solid var(--border-primary);
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+      }
+      .app-layout.sidebar-collapsed #toggle-sidebar-btn {
+        left: 1rem; /* Reste visible même si la sidebar est repliée */
+        color: var(--accent-primary);
+        border-color: var(--accent-primary);
+      }
+      #toggle-sidebar-btn:hover {
+        background-color: var(--accent-primary);
+        color: white;
+        border-color: var(--accent-primary);
+      }
+
+              .preview-panel { flex-grow: 1; display: flex; flex-direction: row; } /* Changé en row */
+
+                      .preview-content { flex-grow: 1; display: flex; flex-direction: column; position: relative; } /* Ajout de position: relative */
+
+                      #drop-overlay {
+
+                          position: absolute;
+
+                          top: 0;
+
+                          left: 0;
+
+                          width: 100%;
+
+                          height: 100%;
+
+                          z-index: 10;
+
+                          background-color: rgba(0, 123, 255, 0.1);
+
+                          border: 2px dashed var(--accent-primary);
+
+                          display: none; /* Caché par défaut */
+
+                          pointer-events: none; /* N'intercepte pas les clics par défaut */
+
+                      }
+
+                      .preview-content.is-dragging #drop-overlay {
+
+                          display: block;
+
+                          pointer-events: auto; /* Intercepte les événements pendant le drag */
+
+                      }
+
+              
+
+                      .preview-header { 
+
+                          padding: 0.75rem 1.5rem; 
+
+                          background-color: var(--bg-surface); 
+
+                          border-bottom: 1px solid var(--border-primary);  
+
+                  font-weight: 600; 
+
+                  position: relative;
+
+                  flex-shrink: 0;
+
+              }
+
+              .preview-header .open-in-new-tab {
+
+                  position: absolute;
+
+                  top: 0.75rem;
+
+                  right: 1.5rem;
+
+                  font-size: 1.2rem;
+
+                  color: var(--text-secondary);
+
+                  text-decoration: none;
+
+                  transition: color 0.2s;
+
+              }
+
+              .preview-header .open-in-new-tab:hover {
+
+                  color: var(--text-link);
+
+              }
+
+              iframe { flex-grow: 1; border: none; background-color: #fff; }
+
+              
+
+              .components-panel {
+
+                  width: 240px;
+
+                  border-left: 1px solid var(--border-primary);
+
+                  background-color: var(--bg-surface);
+
+                  display: flex;
+
+                  flex-direction: column;
+
+                  flex-shrink: 0;
+
+              }
+
+              .components-header {
+
+                  padding: 0.75rem 1.5rem;
+
+                  font-weight: 600;
+
+                  border-bottom: 1px solid var(--border-primary);
+
+                  flex-shrink: 0;
+
+              }
+
+              .components-list {
+
+                  padding: 1rem;
+
+                  display: flex;
+
+                  flex-direction: column;
+
+                  gap: 0.75rem;
+
+                  overflow-y: auto;
+
+              }
+
+                      .component-item {
+
+                          position: relative; /* Nécessaire pour le positionnement de l'aperçu */
+
+                          padding: 0.75rem 1rem;
+
+                          background-color: var(--bg-canvas);
+
+                          border: 1px solid var(--border-primary);
+
+                          border-radius: var(--radius);
+
+                          cursor: grab;
+
+                          font-weight: 500;
+
+                          transition: background-color 0.2s, border-color 0.2s;
+
+                      }
+
+                      .component-item:hover {
+
+                          background-color: var(--bg-hover);
+
+                          border-color: var(--border-secondary);
+
+                      }
+
+                              .component-item:active {
+
+                                  cursor: grabbing;
+
+                                  background-color: var(--accent-primary-muted);
+
+                                  border-color: var(--accent-primary);
+
+                              }
+
+                      
+
+                              /* Styles pour l'infobulle d'aperçu globale */
+
+                              #component-tooltip {
+
+                                  display: none;
+
+                                  position: fixed; /* Positionné par rapport à la fenêtre */
+
+                                  width: 220px;
+
+                                  background-color: var(--bg-surface);
+
+                                  border: 1px solid var(--border-secondary);
+
+                                  border-radius: var(--radius);
+
+                                  padding: 1rem;
+
+                                  z-index: 1000;
+
+                                  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+
+                                  pointer-events: none; /* N'interfère pas avec la souris */
+
+                                  transition: opacity 0.1s ease-in-out;
+
+                                  opacity: 0;
+
+                              }
+
+                              #component-tooltip.visible {
+
+                                  display: block;
+
+                                  opacity: 1;
+
+                              }
+
+                              #component-tooltip h4 {
+
+                                  margin: 0 0 0.5rem;
+
+                                  font-size: 0.875rem;
+
+                                  color: var(--text-secondary);
+
+                                  border-bottom: 1px solid var(--border-primary);
+
+                                  padding-bottom: 0.5rem;
+
+                              }
+
+                              #component-tooltip .preview-content {
+
+                                  display: flex;
+
+                                  flex-direction: column;
+
+                                  gap: 0.5rem;
+
+                                  align-items: flex-start;
+
+                              }
+
+                              #component-tooltip .preview-card {
+
+                                  border: 1px solid var(--border-primary);
+
+                                  border-radius: var(--radius);
+
+                                  padding: 0.5rem;
+
+                                  width: 100%;
+
+                                  font-size: 0.8rem;
+
+                              }
+
+                              #component-tooltip .preview-card-title { font-weight: 600; }
+
+                              #component-tooltip .preview-card-body { color: var(--text-secondary); }
+
+                      
+
+                              #response-container { margin-top: 1.5rem; }
+
+              #response {
+
+                   white-space: pre-wrap; font-family: monospace; font-size: 0.875rem;
+
+                   background-color: var(--bg-canvas); color: var(--text-secondary);
+        padding: 1rem;
+        border-radius: var(--radius);
+        border: 1px solid var(--border-primary);
+      }
+      #response h3 {
+        color: var(--text-primary);
+        font-size: 1rem;
+        border-bottom: 1px solid var(--border-primary);
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+      }
+      #response p {
+        margin: 0 0 1rem;
+      }
+      #response pre {
+        background-color: #010409;
+        padding: 1rem;
+        border-radius: var(--radius);
+      }
+
+      .sidebar h1 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+      }
+      .sidebar .form-group label {
+        color: var(--text-secondary);
+      }
+      .sidebar .form-actions {
+        flex-direction: row;
+        gap: 0.75rem;
+        margin-top: 1rem;
+      }
+      .sidebar .btn {
+        flex-grow: 1;
+      }
+      .sidebar .project-info {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border-primary);
+      }
+      .sidebar .project-name {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        margin: 0;
+      }
+      .sidebar .project-name strong {
+        color: var(--text-primary);
+        font-weight: 600;
+      }
+      .hidden {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar">
+        <div class="sidebar-content">
+          <a href="{{ url_for('project.project_selection') }}" class="app-logo"
+            >Agent<span>Dev</span></a
+          >
+          <div class="project-info">
+            <p class="project-name">
+              Projet Actif : <strong>{{ project_name }}</strong>
+            </p>
+          </div>
+
+          <h1>Agent de Développement</h1>
+          <form id="prompt-form">
+            <div class="form-group">
+              <label for="prompt-text">Votre demande :</label>
+              <textarea
+                id="prompt-text"
+                name="prompt"
+                class="form-control"
+                required
+                rows="4"
+              ></textarea>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Proposer</button>
+              <button
+                type="button"
+                id="approve-button"
+                class="btn btn-secondary"
+              >
+                Approuver
+              </button>
+            </div>
+            <div class="form-actions" style="margin-top: 0.5rem">
+              <button
+                type="button"
+                id="confirm-change-button"
+                class="btn btn-primary hidden"
+              >
+                Confirmer
+              </button>
+              <button
+                type="button"
+                id="undo-change-button"
+                class="btn btn-danger hidden"
+              >
+                Annuler
+              </button>
+            </div>
+            <div class="form-actions" style="margin-top: 0.5rem">
+              <button
+                type="button"
+                id="index-project-btn"
+                class="btn btn-secondary"
+                style="width: 100%"
+              >
+                Indexer le Projet
+              </button>
+              <button
+                type="button"
+                id="rollback-button"
+                class="btn btn-secondary"
+              >
+                Annuler tout
+              </button>
+            </div>
+          </form>
+
+          <div id="response-container">
+            <div id="loader" class="spinner-container">
+              <div class="spinner"></div>
+            </div>
+            <div id="response">
+              <p>La réponse de l'agent apparaîtra ici.</p>
+            </div>
+          </div>
+        </div>
+        <div class="sidebar-footer">
+          <a
+            href="{{ url_for('project.reset_project') }}"
+            id="exit-button"
+            class="btn btn-danger"
+            style="width: 100%"
+            >Arrêter et Quitter</a
+          >
+        </div>
+      </aside>
+              <main class="main-content">
+                  <button id="toggle-sidebar-btn" title="Basculer la barre latérale">«</button>
+                  <div class="preview-panel">
+                <div class="preview-content">
+                    <div class="preview-header">
+                        <span>Aperçu en direct</span>
+                        <a href="/preview" target="_blank" class="open-in-new-tab" title="Ouvrir dans un nouvel onglet">&#x2197;</a>
+                    </div>
+                    <iframe id="preview-frame" src="/preview" title="Aperçu en direct"></iframe>
+                    <div id="drop-overlay"></div>
+                </div>
+                <aside class="components-panel">
+                    <div class="components-header">Composants</div>
+                    <div class="components-list">
+                        <div class="component-item" draggable="true" data-component-type="Button">
+                            Bouton
+                            <div class="component-preview-source" style="display: none;">
+                                <h4>Aperçu: Bouton</h4>
+                                <div class="preview-content"><button class="btn btn-primary" disabled>Exemple</button></div>
+                            </div>
+                        </div>
+                        <div class="component-item" draggable="true" data-component-type="Card">
+                            Carte
+                            <div class="component-preview-source" style="display: none;">
+                                <h4>Aperçu: Carte</h4>
+                                <div class="preview-content"><div class="preview-card"><div class="preview-card-title">Titre</div><p class="preview-card-body">Contenu...</p></div></div>
+                            </div>
+                        </div>
+                        <div class="component-item" draggable="true" data-component-type="Navbar">
+                            Barre de navigation
+                            <div class="component-preview-source" style="display: none;">
+                                <h4>Aperçu: Navbar</h4>
+                                <div class="preview-content" style="background: #333; padding: 8px; border-radius: 4px; color: white; width: 100%; display: flex; justify-content: space-between;"><span>Logo</span><span>Menu</span></div>
+                            </div>
+                        </div>
+                        <div class="component-item" draggable="true" data-component-type="Footer">
+                            Footer
+                             <div class="component-preview-source" style="display: none;">
+                                <h4>Aperçu: Footer</h4>
+                                <div class="preview-content" style="background: #222; padding: 8px; border-radius: 4px; color: #aaa; width: 100%; text-align: center; font-size: 0.8rem;">© 2024 Mon Site</div>
+                            </div>
+                        </div>
+                        <div class="component-item" draggable="true" data-component-type="Image Gallery">
+                            Galerie d'images
+                            <div class="component-preview-source" style="display: none;">
+                                <h4>Aperçu: Galerie</h4>
+                                <div class="preview-content" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px;"><div style="width: 40px; height: 40px; background: #ccc;"></div><div style="width: 40px; height: 40px; background: #ccc;"></div><div style="width: 40px; height: 40px; background: #ccc;"></div><div style="width: 40px; height: 40px; background: #ccc;"></div></div>
+                            </div>
+                        </div>
+                        <div class="component-item" draggable="true" data-component-type="Contact Form">
+                            Formulaire de contact
+                            <div class="component-preview-source" style="display: none;">
+                                <h4>Aperçu: Formulaire</h4>
+                                <div class="preview-content" style="display: flex; flex-direction: column; gap: 4px; width: 100%;"><input type="text" placeholder="Nom" disabled style="padding: 4px; border-radius: 4px; border: 1px solid #ccc;"><textarea placeholder="Message" disabled style="padding: 4px; border-radius: 4px; border: 1px solid #ccc;"></textarea></div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </main>
+    </div>
+
+    <div id="component-tooltip"></div>
+
+    <script>
+        // --- Gestion de la barre latérale rétractable ---
+        const appLayout = document.querySelector('.app-layout');
+        const toggleBtn = document.getElementById('toggle-sidebar-btn');
+
+        toggleBtn.addEventListener('click', () => {
+            const isCollapsed = appLayout.classList.toggle('sidebar-collapsed');
+            toggleBtn.innerHTML = isCollapsed ? '»' : '«';
+            localStorage.setItem('sidebarState', isCollapsed ? 'collapsed' : 'expanded');
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedState = localStorage.getItem('sidebarState');
+            if (savedState === 'collapsed') {
+                appLayout.classList.add('sidebar-collapsed');
+                toggleBtn.innerHTML = '»';
+            }
+        });
+
+        // --- Logique de l'API ---
+        const promptForm = document.getElementById('prompt-form');
+        const approveBtn = document.getElementById('approve-button');
+        const rollbackBtn = document.getElementById('rollback-button');
+        const indexProjectBtn = document.getElementById('index-project-btn');
+        const exitBtn = document.getElementById('exit-button');
+        const confirmChangeBtn = document.getElementById('confirm-change-button');
+        const undoChangeBtn = document.getElementById('undo-change-button');
+        const responseDiv = document.getElementById('response');
+        const loader = document.getElementById('loader');
+        const previewFrame = document.getElementById('preview-frame');
+
+        function toggleChangeButtons(show) {
+            if (show) {
+                confirmChangeBtn.classList.remove('hidden');
+                undoChangeBtn.classList.remove('hidden');
+            } else {
+                confirmChangeBtn.classList.add('hidden');
+                undoChangeBtn.classList.add('hidden');
+            }
+        }
+
+        async function handleApiCall(endpoint, options, successMessage) {
+            responseDiv.innerHTML = '';
+            loader.style.display = 'flex';
+            try {
+                const response = await fetch(endpoint, options);
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.error || `Erreur HTTP ${response.status}`);
+                
+                let html = `<h3>${successMessage}</h3>`;
+                if (data.explanation) html += `<p>${data.explanation.replace(/\\n/g, '<br>')}</p>`;
+                if (data.diff) html += `<h3>Diff</h3><pre><code>${data.diff}</code></pre>`;
+                if (data.message) html += `<p>${data.message}</p>`;
+                responseDiv.innerHTML = html;
+
+                if (endpoint === '/api/propose_changes') {
+                    toggleChangeButtons(true);
+                } else if (endpoint === '/api/confirm_change' || endpoint === '/api/undo_change') {
+                    toggleChangeButtons(false);
+                }
+
+                // Ne recharger la preview que si ce n'est pas une opération d'indexation
+                if (endpoint !== '/api/index_project') {
+                    previewFrame.contentWindow.location.reload();
+                }
+            } catch (error) {
+                responseDiv.innerHTML = `<p style="color: var(--danger-primary);"><strong>Erreur:</strong> ${error.message}</p>`;
+            } finally {
+                loader.style.display = 'none';
+            }
+        }
+
+        promptForm.addEventListener('submit', e => {
+            e.preventDefault();
+            handleApiCall('/api/propose_changes', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prompt: document.getElementById('prompt-text').value })
+            }, 'Réponse de l\'IA');
+        });
+
+        approveBtn.addEventListener('click', () => {
+            if (confirm("Êtes-vous sûr de vouloir approuver et appliquer ces changements ?")) {
+                handleApiCall('/api/approve_changes', { method: 'POST' }, 'Changements Approuvés');
+            }
+        });
+
+        rollbackBtn.addEventListener('click', () => {
+            if (confirm("Êtes-vous sûr de vouloir annuler tous les changements non validés ?")) {
+                handleApiCall('/api/rollback_changes', { method: 'POST' }, 'Changements Annulés');
+            }
+        });
+
+        confirmChangeBtn.addEventListener('click', () => {
+            if (confirm("Êtes-vous sûr de vouloir confirmer cette modification ?")) {
+                handleApiCall('/api/confirm_change', { method: 'POST' }, 'Modification Confirmée');
+            }
+        });
+
+        undoChangeBtn.addEventListener('click', () => {
+            if (confirm("Êtes-vous sûr de vouloir annuler cette modification ?")) {
+                handleApiCall('/api/undo_change', { method: 'POST' }, 'Modification Annulée');
+            }
+        });
+
+        indexProjectBtn.addEventListener('click', () => {
+            handleApiCall('/api/index_project', { method: 'POST' }, 'Indexation du Projet');
+        });
+
+        exitBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            try {
+                await fetch('/api/clear_history', { method: 'POST' });
+            } catch (error) {
+                console.error("Erreur lors du nettoyage de l'historique:", error);
+            }
+            finally {
+                window.location.href = e.target.href;
+            }
+        });
+
+        // --- Logique du Drag & Drop (Méthode Overlay) ---
+        const components = document.querySelectorAll('.component-item');
+        const dropOverlay = document.getElementById('drop-overlay');
+        const previewContent = document.querySelector('.preview-content');
+        const tooltip = document.getElementById('component-tooltip');
+
+        components.forEach(component => {
+            component.addEventListener('dragstart', (e) => {
+                tooltip.classList.remove('visible'); // Cacher l'aperçu pendant le drag
+                e.dataTransfer.setData('text/plain', e.target.dataset.componentType);
+                previewContent.classList.add('is-dragging');
+            });
+            component.addEventListener('dragend', () => {
+                previewContent.classList.remove('is-dragging');
+            });
+
+            // Gestion de l'aperçu au survol
+            component.addEventListener('mouseenter', (e) => {
+                const previewSource = e.currentTarget.querySelector('.component-preview-source');
+                if (previewSource) {
+                    tooltip.innerHTML = previewSource.innerHTML;
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    tooltip.style.top = `${rect.top}px`;
+                    tooltip.style.left = `${rect.right + 10}px`; // 10px à droite de l'élément
+                    tooltip.classList.add('visible');
+                }
+            });
+            component.addEventListener('mouseleave', () => {
+                tooltip.classList.remove('visible');
+            });
+        });
+
+        dropOverlay.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'copy';
+        });
+
+        dropOverlay.addEventListener('drop', (e) => {
+            e.preventDefault();
+            previewContent.classList.remove('is-dragging');
+            
+            const componentType = e.dataTransfer.getData('text/plain');
+            const iframeRect = previewFrame.getBoundingClientRect();
+            const x = e.clientX - iframeRect.left;
+            const y = e.clientY - iframeRect.top;
+
+            const elements = previewFrame.contentDocument.elementsFromPoint(x, y);
+            const targetElement = elements.find(el => el.tagName.toLowerCase() !== 'html' && el.tagName.toLowerCase() !== 'body');
+
+            if (targetElement) {
+                // Construire une description de la cible pour l'IA
+                const targetDescription = `a <${targetElement.tagName.toLowerCase()}> tag with the classes "${targetElement.className}" and inner text "${targetElement.innerText.substring(0, 100).trim()}"`;
+
+                // Construire le prompt pour l'IA
+                const prompt = `The user performed a drag-and-drop action to add a new component.\n- Component Type to Add: "${componentType}"\n- Target Element: The user dropped it on ${targetDescription}.\n\nYour task is to modify the codebase to incorporate this new component.\n1.  First, determine the most logical source file and location to add the new component based on the target element's description.\n2.  Create a new, basic placeholder component file for "${componentType}" if a similar one doesn't already exist. For Vue, use <template>, <script setup>, <style>. For React, create a simple functional component.\n3.  Import this new component into the parent source file you identified.\n4.  Finally, add the new component's tag (e.g., <${componentType} />) into the parent's template, placing it in a logical position near the target element.`;
+
+                console.log("Generated prompt for AI:", prompt);
+
+                // Appeler l'API existante avec le prompt généré
+                handleApiCall('/api/propose_changes', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt: prompt })
+                }, `Demande d'ajout du composant ${componentType}...`);
+
+            } else {
+                console.warn("Drop event: No specific target element found in iframe.");
+                alert(`Component "${componentType}" was dropped, but no specific target element was found.`);
+            }
+        });
+    </script>
+</body>
+</html>

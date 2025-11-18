@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sélection du Projet - AgentDev</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar">
+        <a href="{{ url_for('project.project_selection') }}" class="app-logo"
+          >Agent<span>Dev</span></a
+        >
+      </aside>
+      <main class="main-content">
+        <div class="content-wrapper" style="max-width: 600px">
+          <h1>Gestionnaire de Projet</h1>
+
+          {% with messages = get_flashed_messages(with_categories=true) %} {% if
+          messages %}
+          <ul class="flash-messages">
+            {% for category, message in messages %}
+            <li class="flash-{{ category }}">{{ message }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %} {% endwith %}
+
+          <div class="card">
+            <h2>Charger un projet existant</h2>
+            <form
+              action="{{ url_for('project.select_project') }}"
+              method="POST"
+              onsubmit="showSpinner(this)"
+            >
+              <div class="form-group">
+                <label for="project_name">Projet</label>
+                <select
+                  name="project_name"
+                  id="project_name"
+                  class="form-control"
+                  required
+                >
+                  <option value="" disabled selected>
+                    Sélectionnez un projet
+                  </option>
+                  {% for project in projects %}
+                  <option value="{{ project }}">{{ project }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                  Charger le Projet
+                </button>
+              </div>
+            </form>
+
+            <div class="divider"><span>OU</span></div>
+
+            <h2>Créer un nouveau projet</h2>
+            <form
+              action="{{ url_for('project.create_project') }}"
+              method="POST"
+              onsubmit="showSpinner(this)"
+            >
+              <div class="form-group">
+                <label for="new_project_name">Nom du nouveau projet</label>
+                <input
+                  type="text"
+                  name="new_project_name"
+                  id="new_project_name"
+                  class="form-control"
+                  placeholder="ex: mon-nouveau-site"
+                  required
+                />
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                  Créer le Projet
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div id="loading-spinner" class="spinner-container">
+            <div class="spinner"></div>
+            <p style="color: var(--text-secondary); margin-top: 1rem">
+              Préparation de l'environnement...
+            </p>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      function showSpinner(form) {
+        form.closest(".card").style.display = "none";
+        document.getElementById("loading-spinner").style.display = "flex";
+      }
+    </script>
+  </body>
+</html>

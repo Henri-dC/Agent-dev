@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paramètres - AgentDev</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar">
+        <a href="{{ url_for('project.project_selection') }}" class="app-logo"
+          >Agent<span>Dev</span></a
+        >
+      </aside>
+      <main class="main-content">
+        <div class="content-wrapper">
+          <h1>Paramètres du Projet</h1>
+          <form id="settings-form" class="card">
+            <h2>Configuration Générale</h2>
+            <div class="form-group">
+              <label for="framework">Framework Frontend</label>
+              <select id="framework" name="frontend-framework" class="form-control">
+                <option value="vue">Vue.js</option>
+                <option value="react">React</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="repo-url">URL du dépôt Git (optionnel)</label>
+              <input
+                type="text"
+                id="repo-url"
+                name="repo-url"
+                class="form-control"
+                placeholder="https://github.com/user/repo.git"
+              />
+            </div>
+
+            <h2>Intégrations</h2>
+            <div class="form-group">
+              <label for="wordpress-api-enabled">API WordPress</label>
+              <div>
+                <input
+                  type="checkbox"
+                  id="wordpress-api-enabled"
+                  name="wordpress-api-enabled"
+                />
+                <label
+                  for="wordpress-api-enabled"
+                  style="
+                    display: inline;
+                    margin-left: 8px;
+                    font-weight: normal;
+                    color: var(--text-primary);
+                  "
+                  >Activer</label
+                >
+                <button
+                  type="button"
+                  id="open-wp-modal-btn"
+                  class="btn-link"
+                  style="margin-left: 16px"
+                >
+                  Configurer
+                </button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="enable-database">Base de données</label>
+              <div>
+                <input
+                  type="checkbox"
+                  id="enable-database"
+                  name="enable-database"
+                />
+                <label
+                  for="enable-database"
+                  style="
+                    display: inline;
+                    margin-left: 8px;
+                    font-weight: normal;
+                    color: var(--text-primary);
+                  "
+                  >Activer (Prisma/SQLite)</label
+                >
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button
+                type="button"
+                onclick="window.location.href='/reset'"
+                class="btn btn-secondary"
+              >
+                Changer de projet
+              </button>
+              <button type="submit" class="btn btn-secondary">
+                Enregistrer
+              </button>
+              <button type="button" id="start-dev-btn" class="btn btn-primary">
+                Lancer le développement
+              </button>
+            </div>
+          </form>
+
+          <div
+            id="status-container"
+            class="card"
+            style="margin-top: 2rem; display: none"
+          >
+            <h2>Statut</h2>
+            <pre
+              id="status-output"
+              style="
+                background-color: var(--bg-canvas);
+                color: var(--text-secondary);
+                padding: 1rem;
+                border-radius: var(--radius);
+              "
+            ></pre>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Modale pour les paramètres WordPress -->
+    <div id="wp-modal" class="modal-overlay">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Paramètres WordPress</h2>
+          <button id="close-wp-modal-btn" class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body" id="wp-settings-fields">
+          <!-- Les champs seront injectés ici par le script -->
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            id="save-wp-settings-btn"
+            class="btn btn-primary"
+          >
+            Enregistrer et Fermer
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // --- Logique de la modale WordPress ---
+      const wpModal = document.getElementById("wp-modal");
+      const openModalBtn = document.getElementById("open-wp-modal-btn");
+      const closeModalBtn = document.getElementById("close-wp-modal-btn");
+      const saveModalBtn = document.getElementById("save-wp-settings-btn");
+      const wpSettingsFieldsContainer =
+        document.getElementById("wp-settings-fields");
+
+      const wpFields = [
+        { id: "wp-api-url", label: "WP_API_URL" },
+        { id: "woo-api-url", label: "WOO_API_URL" },
+        { id: "woo-consumer-key", label: "WOO_CONSUMER_KEY" },
+        {
+          id: "woo-consumer-secret",
+          label: "WOO_CONSUMER_SECRET",
+          type: "password",
+        },
+        { id: "wp-username", label: "WP_USERNAME" },
+        { id: "wp-password", label: "WP_PASSWORD", type: "password" },
+        { id: "admin-username", label: "ADMIN_USERNAME" },
+        { id: "admin-password", label: "ADMIN_PASSWORD", type: "password" },
+        { id: "jwt-secret", label: "JWT_SECRET", type: "password" },
+        { id: "mailjet-api-key", label: "MAILJET_API_KEY" },
+        {
+          id: "mailjet-secret-key",
+          label: "MAILJET_SECRET_KEY",
+          type: "password",
+        },
+        { id: "mail-from", label: "MAIL_FROM" },
+        { id: "mail-to-admin", label: "MAIL_TO_ADMIN" },
+        { id: "instagram-access-token", label: "INSTAGRAM_ACCESS_TOKEN" },
+        {
+          id: "recaptcha-secret-key",
+          label: "RECAPTCHA_SECRET_KEY",
+          type: "password",
+        },
+      ];
+
+      wpSettingsFieldsContainer.innerHTML = wpFields
+        .map(
+          (field) => `
+            <div class="form-group">
+                <label for="${field.id}">${field.label}</label>
+                <input type="${field.type || "text"}" id="${field.id}" name="${
+            field.id
+          }" class="form-control">
+            </div>
+        `
+        )
+        .join("");
+
+      function toggleModal(show) {
+        wpModal.style.display = show ? "flex" : "none";
+      }
+      openModalBtn.addEventListener("click", () => toggleModal(true));
+      closeModalBtn.addEventListener("click", () => toggleModal(false));
+      saveModalBtn.addEventListener("click", () => {
+        document.querySelector('#settings-form button[type="submit"]').click();
+        toggleModal(false);
+      });
+
+      // --- Logique du formulaire principal ---
+      const settingsForm = document.getElementById("settings-form");
+      const startDevBtn = document.getElementById("start-dev-btn");
+      const statusOutput = document.getElementById("status-output");
+      const statusContainer = document.getElementById("status-container");
+
+      settingsForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = new FormData(settingsForm);
+        const settings = {};
+        for (let [key, value] of formData.entries()) {
+          settings[key.replace(/-/g, "_")] = value;
+        }
+
+        wpFields.forEach((field) => {
+          settings[field.id.replace(/-/g, "_").toUpperCase()] =
+            document.getElementById(field.id).value;
+        });
+
+        settings.wordpress_api_enabled = document.getElementById(
+          "wordpress-api-enabled"
+        ).checked;
+        settings.enable_database =
+          document.getElementById("enable-database").checked;
+
+        const response = await fetch("/api/save_settings", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(settings),
+        });
+        alert(
+          response.ok
+            ? "Paramètres enregistrés."
+            : "Erreur lors de l'enregistrement."
+        );
+      });
+
+      startDevBtn.addEventListener("click", async () => {
+        statusContainer.style.display = "block";
+        statusOutput.textContent =
+          "Initialisation de l'environnement de développement...\nCela peut prendre quelques minutes...";
+
+        try {
+          const response = await fetch("/api/setup_and_start", {
+            method: "POST",
+          });
+          const result = await response.json();
+          statusOutput.textContent += response.ok
+            ? "\nEnvironnement prêt ! Redirection..."
+            : `\nErreur: ${result.message}`;
+          if (response.ok)
+            setTimeout(() => (window.location.href = "/main"), 2000);
+        } catch (error) {
+          statusOutput.textContent += `\nErreur de connexion: ${error}`;
+        }
+      });
+
+      // --- Chargement de la configuration initiale ---
+      (async () => {
+        try {
+          const response = await fetch("/api/get_settings");
+          if (!response.ok) return;
+          const config = await response.json();
+
+          document.getElementById("framework").value =
+            config.frontend_framework || "vue";
+          document.getElementById("repo-url").value =
+            config.repository_url || "";
+          document.getElementById("wordpress-api-enabled").checked =
+            config.wordpress_api_enabled || false;
+          document.getElementById("enable-database").checked =
+            config.enable_database || false;
+
+          wpFields.forEach((field) => {
+            const key = field.id.replace(/-/g, "_").toUpperCase();
+            if (config[key])
+              document.getElementById(field.id).value = config[key];
+          });
+        } catch (error) {
+          console.error("Impossible de charger la configuration:", error);
+        }
+      })();
+    </script>
+  </body>
+</html>

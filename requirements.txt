@@ -1,0 +1,7 @@
+Flask
+python-dotenv
+google-generativeai
+anthropic
+requests
+chromadb
+google-genai
